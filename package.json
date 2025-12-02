@@ -1,0 +1,22 @@
+{
+  "version": "0.0.1",
+  "name": "petsuite.io",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.6.0",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "better-auth": "^1.3.34",
+    "hono": "^4.10.4",
+    "zod": "^4.1.12"
+  }
+}
