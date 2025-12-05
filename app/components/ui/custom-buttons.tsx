@@ -1,4 +1,4 @@
-import { Loader2, PlusIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Button, buttonVariants } from "./button";
 import { ComponentProps } from "react";
 import { VariantProps } from "class-variance-authority";
@@ -31,8 +31,12 @@ export const RegisterButton = ({
   ...props
 }: ComponentProps<"button">) => {
   return (
-    <Button className={className} {...props} variant="default">
-      <PlusIcon className="size-4" />
+    <Button
+      className={cn("px-2 sm:px-4", className)}
+      size="lg"
+      {...props}
+      variant="default"
+    >
       <span className="sr-only sm:not-sr-only">{children}</span>
     </Button>
   );

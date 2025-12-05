@@ -5,8 +5,13 @@ import { db } from "../../lib/db";
 import { and, eq, ilike, sql } from "drizzle-orm";
 import { type Variables } from "../..";
 import { getTableColumns } from "drizzle-orm";
-import { selectPetsSchema } from "./pets.schema";
+import {
+  createPetSchema,
+  petGeneralInfoSchema,
+  selectPetsSchema,
+} from "./pets.schema";
 import { pets } from "../../db/pets.db";
+import { deleteSchema, idSchema } from "../../lib/schemas";
 
 export const petsRoute = new Hono<{ Variables: Variables }>()
   .use(checkPermission("pets"))
@@ -34,4 +39,52 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
       rows,
       count: rows[0]?.count || 0,
     });
+  })
+
+  .post("/", validator("json", createPetSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    await db.insert(pets).values({
+      ...data,
+      organizationId: c.get("orgId"),
+    });
+
+    return c.json({});
+  })
+
+  .get("/general", validator("query", deleteSchema), async (c) => {
+    const data = c.req.valid("query");
+
+    const [pet] = await db
+      .select()
+      .from(pets)
+      .where(
+        and(eq(pets.id, data.id), eq(pets.organizationId, c.get("orgId")))
+      );
+
+    return c.json(pet || null);
+  })
+  .put("/general", validator("json", petGeneralInfoSchema), async (c) => {
+    const data = c.req.valid("json");
+    await db
+      .update(pets)
+      .set({
+        ...data,
+      })
+      .where(
+        and(eq(pets.id, data.id), eq(pets.organizationId, c.get("orgId")))
+      );
+    return c.json({});
+  })
+
+  .delete("/", validator("json", deleteSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    await db
+      .delete(pets)
+      .where(
+        and(eq(pets.id, data.id), eq(pets.organizationId, c.get("orgId")))
+      );
+
+    return c.json({});
   });

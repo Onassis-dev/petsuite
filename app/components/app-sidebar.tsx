@@ -24,9 +24,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={true}>
               <Link href="/dashboard">
-                <Home />
+                <Home className="!size-5" strokeWidth={1.8} />
                 <span>Home</span>
               </Link>
             </SidebarMenuButton>
@@ -35,7 +35,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/dashboard/pets">
-                  <PawPrint />
+                  <PawPrint className="!size-5" strokeWidth={1.8} />
                   <span>Pets</span>
                 </Link>
               </SidebarMenuButton>
@@ -45,7 +45,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/dashboard/adopters">
-                  <Users />
+                  <Users className="!size-5" strokeWidth={1.8} />
                   <span>Adopters</span>
                 </Link>
               </SidebarMenuButton>
@@ -55,7 +55,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
                 <Link href="/dashboard/tasks">
-                  <CircleCheckBig />
+                  <CircleCheckBig className="!size-5" strokeWidth={1.8} />
                   <span>Tasks</span>
                 </Link>
               </SidebarMenuButton>

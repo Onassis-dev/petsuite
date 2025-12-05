@@ -6,9 +6,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { DashboardWrapper } from "./providers";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { Manrope } from "next/font/google";
+import { Toaster } from "sonner";
 
-import { Separator } from "@/components/ui/separator";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+const manrope = Manrope({
+  subsets: ["latin"],
+  variable: "--font-manrope",
+});
 
 export default function RootLayout({
   children,
@@ -17,21 +21,24 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>
+      <body className={manrope.className}>
         <SidebarProvider>
           <QueryClientProvider client={queryClient}>
+            <Toaster />
             <DashboardWrapper>
               <AppSidebar />
               <SidebarInset>
-                <header className="flex h-12 shrink-0 items-center border-b gap-2 px-4">
-                  <SidebarTrigger />
-                  <Separator
+                <header className="flex shrink-0 items-center gap-2 pb-8">
+                  {/* <SidebarTrigger /> */}
+                  {/* <Separator
                     orientation="vertical"
                     className="data-[orientation=vertical]:h-4"
-                  />
-                  <h1 className="text-base font-medium">Adopters</h1>
+                  /> */}
+                  <h1 className="font-bold text-3xl text-[#333333]">
+                    Adopters
+                  </h1>
                 </header>
-                <div className="p-4 sm:p-8">{children}</div>
+                <div className="">{children}</div>
               </SidebarInset>
             </DashboardWrapper>
           </QueryClientProvider>

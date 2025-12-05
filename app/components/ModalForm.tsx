@@ -53,7 +53,10 @@ export const ModalForm = ({
         )}
       </DialogTrigger>
 
-      <DialogContent className="max-w-full sm:max-w-md h-screen sm:h-auto  grid-rows-[auto_1fr] rounded-none sm:rounded-lg p-0">
+      <DialogContent
+        showCloseButton={false}
+        className="max-w-full sm:max-w-md h-screen sm:h-auto  grid-rows-[auto_1fr] rounded-none sm:rounded-3xl p-0"
+      >
         <DialogHeader className="p-6 pb-0">
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
@@ -62,19 +65,14 @@ export const ModalForm = ({
           {children}
 
           <DialogFooter className="mt-auto">
-            <Button
-              asChild
-              variant="outline"
-              className="hidden sm:flex h-8"
-              size="sm"
-            >
+            <Button asChild variant="outline" className="hidden sm:flex">
               <DialogClose disabled={isPending}>{t("close")}</DialogClose>
             </Button>
             {submit && (
               <SubmitButton
                 onClick={submit}
                 disabled={isPending}
-                className="w-full sm:w-20 h-8"
+                className="w-full sm:w-auto"
               >
                 {t("save")}
               </SubmitButton>

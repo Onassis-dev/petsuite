@@ -100,7 +100,7 @@ export const CrudTable = ({
   });
 
   return (
-    <div className="relative sm:w-full overflow-hidden -ml-4 sm:ml-0 w-screen sm:rounded-lg border">
+    <div className="relative sm:w-full overflow-hidden -ml-4 sm:ml-0 w-screen sm:rounded-2xl border">
       <Table>
         <TableHeader className="h-12">
           <TableRow>
@@ -167,6 +167,7 @@ export const CrudTable = ({
 
                       {setOpenDelete && (
                         <DropdownMenuItem
+                          variant="destructive"
                           onClick={() => {
                             selectRow(row);
                             setOpenDelete(true);
