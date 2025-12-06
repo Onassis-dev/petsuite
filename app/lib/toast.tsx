@@ -33,7 +33,7 @@ function Toast({
         <CircleX className="size-5 text-red-500" strokeWidth={1.8} />
       )}
 
-      <span className="text-sm font-medium mb-px">{message}</span>
+      <span className="text-sm mb-px">{message}</span>
     </div>
   );
 }

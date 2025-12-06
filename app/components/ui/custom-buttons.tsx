@@ -33,7 +33,6 @@ export const RegisterButton = ({
   return (
     <Button
       className={cn("px-2 sm:px-4", className)}
-      size="lg"
       {...props}
       variant="default"
     >

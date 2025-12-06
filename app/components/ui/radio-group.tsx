@@ -52,7 +52,7 @@ const RadioGroupItemCard = React.forwardRef<
       )}
       {...props}
     >
-      <span className="text-sm font-medium">{props.children}</span>
+      <span className="text-sm">{props.children}</span>
     </RadioGroupPrimitive.Item>
   );
 });
@@ -60,7 +60,7 @@ RadioGroupItemCard.displayName = RadioGroupPrimitive.Item.displayName;
 
 function RadioItem({ label, value }: { label: string; value: string }) {
   return (
-    <label className="text-sm cursor-pointer font-medium flex items-center gap-2">
+    <label className="text-sm cursor-pointer flex items-center gap-2">
       <RadioGroupItem value={value} />
       {label}
     </label>

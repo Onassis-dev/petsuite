@@ -5,7 +5,6 @@ import { CircleCheckBig, Home, PawPrint, Users } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
-  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -13,8 +12,10 @@ import {
 import { SelectOrganization } from "./SelectOrg";
 import { session } from "@/hooks/use-session";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const location = usePathname();
   return (
     <Sidebar variant="inset" {...props}>
       <SelectOrganization />
@@ -22,7 +23,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={true}>
+            <SidebarMenuButton asChild isActive={isActive(location, undefined)}>
               <Link href="/dashboard">
                 <Home className="!size-5" strokeWidth={1.8} />
                 <span>Home</span>
@@ -31,7 +32,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
           {session?.user?.pets && (
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild isActive={isActive(location, "pets")}>
                 <Link href="/dashboard/pets">
                   <PawPrint className="!size-5" strokeWidth={1.8} />
                   <span>Pets</span>
@@ -41,7 +42,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           )}
           {session?.user?.adopters && (
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton
+                asChild
+                isActive={isActive(location, "adopters")}
+              >
                 <Link href="/dashboard/adopters">
                   <Users className="!size-5" strokeWidth={1.8} />
                   <span>Adopters</span>
@@ -51,7 +55,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           )}
           {session?.user?.tasks && (
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild isActive={isActive(location, "tasks")}>
                 <Link href="/dashboard/tasks">
                   <CircleCheckBig className="!size-5" strokeWidth={1.8} />
                   <span>Tasks</span>
@@ -63,4 +67,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
     </Sidebar>
   );
+}
+
+function isActive(location: string, tab?: string) {
+  return location.split("/")[2] === tab;
 }

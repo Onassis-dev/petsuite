@@ -17,11 +17,11 @@ export const SearchInput = ({
 
   return (
     <div className="relative w-full sm:max-w-60 h-full">
-      <SearchIcon className="absolute left-3 top-3 size-4 text-muted-foreground" />
+      <SearchIcon className="absolute left-3 top-2.5 size-4 text-muted-foreground" />
       <Input
         placeholder={t("search")}
         type={"search"}
-        className={cn("pl-9 h-10 w-full rounded-xl !text-base", className)}
+        className={cn("pl-9 h-9 w-full rounded-xl !text-base", className)}
         value={value}
         onChange={(e) => onChange?.(e)}
       />
