@@ -10,8 +10,8 @@
   --card-foreground: hsl(0 0% 12%);
   --primary: var(--color-blue-600);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: var(--color-blue-100);
-  --secondary-foreground: var(--color-blue-100);
+  --secondary: var(--color-gray-100);
+  --secondary-foreground: var(--color-gray-500);
   --muted: hsl(0 0% 93%);
   --muted-foreground: hsl(0 0% 39%);
   --accent: hsl(0 0% 91%);

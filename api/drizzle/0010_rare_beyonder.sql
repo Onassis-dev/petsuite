@@ -1,0 +1,2 @@
+CREATE TYPE "public"."measurements" AS ENUM('Kgs', 'Lbs');--> statement-breakpoint
+ALTER TABLE "pets" ALTER COLUMN "measurement" SET DATA TYPE "public"."measurements" USING "measurement"::text::"public"."measurements";

@@ -19,11 +19,11 @@ import { createPetSchema } from "@server/routes/pets/pets.schema";
 import {
   Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
+import { SexOptions, SpeciesOptions } from "@/components/ui/select-options";
 
 const defaultValues: z.infer<typeof createPetSchema> = {
   name: "",
@@ -56,30 +56,6 @@ export const PetsForm = () => {
     admissionDate: {
       es: "Fecha de ingreso",
       en: "Admission date",
-    },
-    dog: {
-      es: "Perro",
-      en: "Dog",
-    },
-    cat: {
-      es: "Gato",
-      en: "Cat",
-    },
-    other: {
-      es: "Otro",
-      en: "Other",
-    },
-    male: {
-      es: "Macho",
-      en: "Male",
-    },
-    female: {
-      es: "Hembra",
-      en: "Female",
-    },
-    unknown: {
-      es: "Desconocido",
-      en: "Unknown",
     },
     petRegistered: {
       es: "Mascota registrada",
@@ -153,11 +129,7 @@ export const PetsForm = () => {
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="dog">{t("dog")}</SelectItem>
-                    <SelectItem value="cat">{t("cat")}</SelectItem>
-                    <SelectItem value="other">{t("other")}</SelectItem>
-                  </SelectContent>
+                  <SpeciesOptions />
                 </Select>
                 <FormMessage />
               </FormItem>
@@ -178,11 +150,7 @@ export const PetsForm = () => {
                       <SelectValue />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="male">{t("male")}</SelectItem>
-                    <SelectItem value="female">{t("female")}</SelectItem>
-                    <SelectItem value="unknown">{t("unknown")}</SelectItem>
-                  </SelectContent>
+                  <SexOptions />
                 </Select>
                 <FormMessage />
               </FormItem>

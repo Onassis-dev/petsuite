@@ -14,9 +14,43 @@ import DeleteDialog from "@/components/DeleteDialog";
 import { useI18n } from "@/hooks/use-i18n";
 import { PetsForm } from "./PetsForm";
 import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import {
+  CatIcon,
+  DogIcon,
+  CircleDashedIcon,
+  MarsIcon,
+  VenusIcon,
+  CircleQuestionMarkIcon,
+  CircleCheckIcon,
+} from "lucide-react";
 
 export default function Page() {
   const t = useI18n({
+    male: {
+      es: "Macho",
+      en: "Male",
+    },
+    female: {
+      es: "Hembra",
+      en: "Female",
+    },
+    unknown: {
+      es: "Desconocido",
+      en: "Unknown",
+    },
+    dog: {
+      es: "Perro",
+      en: "Dog",
+    },
+    cat: {
+      es: "Gato",
+      en: "Cat",
+    },
+    other: {
+      es: "Otro",
+      en: "Other",
+    },
     name: {
       es: "Nombre",
       en: "Name",
@@ -28,6 +62,10 @@ export default function Page() {
     sex: {
       es: "Sexo",
       en: "Sex",
+    },
+    status: {
+      es: "Estado",
+      en: "Status",
     },
     deleteTitle: {
       es: "Eliminar mascota",
@@ -78,8 +116,69 @@ export default function Page() {
         status={status}
         columns={[
           { key: "name", title: t("name") },
-          { key: "species", title: t("species"), hide: true },
-          { key: "sex", title: t("sex"), hide: true },
+          {
+            key: "species",
+            title: t("species"),
+            transform: (v) => {
+              if (v === "dog")
+                return (
+                  <Badge variant="secondary">
+                    <DogIcon />
+                    {t("dog")}
+                  </Badge>
+                );
+              if (v === "cat")
+                return (
+                  <Badge variant="secondary">
+                    <CatIcon />
+                    {t("cat")}
+                  </Badge>
+                );
+              if (v === "other")
+                return (
+                  <Badge variant="secondary">
+                    <CircleDashedIcon />
+                    {t("other")}
+                  </Badge>
+                );
+            },
+          },
+          {
+            key: "sex",
+            title: t("sex"),
+            hide: true,
+            transform: (v) => {
+              if (v === "male")
+                return (
+                  <Badge variant="secondary">
+                    <MarsIcon />
+                    {t("male")}
+                  </Badge>
+                );
+              if (v === "female")
+                return (
+                  <Badge variant="secondary">
+                    <VenusIcon />
+                    {t("female")}
+                  </Badge>
+                );
+              if (v === "unknown")
+                return (
+                  <Badge variant="secondary">
+                    <CircleQuestionMarkIcon />
+                    {t("unknown")}
+                  </Badge>
+                );
+            },
+          },
+          {
+            key: "status",
+            title: t("status"),
+            hide: true,
+            transform: (v) => {
+              return <Badge variant="secondary">{v as string}</Badge>;
+            },
+          },
         ]}
         selectRow={setSelectedRow}
         setOpenDelete={setOpenDelete}

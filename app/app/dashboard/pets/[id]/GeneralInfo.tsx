@@ -25,7 +25,14 @@ import {
 } from "@/components/ui/select";
 import { DatePicker } from "@/components/DatePicker";
 import { SubmitButton } from "@/components/ui/custom-buttons";
+import { Textarea } from "@/components/ui/textarea";
 import { useEffect } from "react";
+import {
+  SexOptions,
+  SpeciesOptions,
+  StatusOptions,
+} from "@/components/ui/select-options";
+import { SizeOptions } from "@/components/ui/select-options";
 
 export const GeneralInfo = () => {
   const { language } = useLanguage();
@@ -46,33 +53,33 @@ export const GeneralInfo = () => {
       es: "Información guardada",
       en: "Info saved",
     },
-    dog: {
-      es: "Perro",
-      en: "Dog",
-    },
-    cat: {
-      es: "Gato",
-      en: "Cat",
-    },
-    other: {
-      es: "Otro",
-      en: "Other",
-    },
-    male: {
-      es: "Macho",
-      en: "Male",
-    },
-    female: {
-      es: "Hembra",
-      en: "Female",
-    },
-    unknown: {
-      es: "Desconocido",
-      en: "Unknown",
-    },
     admissionDate: {
       es: "Fecha de ingreso",
       en: "Admission date",
+    },
+    bornDate: {
+      es: "Fecha de nacimiento",
+      en: "Birth date",
+    },
+    size: {
+      es: "Tamaño",
+      en: "Size",
+    },
+    weight: {
+      es: "Peso",
+      en: "Weight",
+    },
+    measurement: {
+      es: "Unidad",
+      en: "Unit",
+    },
+    comments: {
+      es: "Comentarios",
+      en: "Comments",
+    },
+    status: {
+      es: "Estado",
+      en: "Status",
     },
     saveChanges: {
       es: "Guardar cambios",
@@ -89,17 +96,27 @@ export const GeneralInfo = () => {
       name: "",
       species: undefined,
       sex: undefined,
-      admissionDate: "",
+      admissionDate: undefined,
+      bornDate: undefined,
+      size: undefined,
+      weight: undefined,
+      measurement: undefined,
+      comments: undefined,
+      status: undefined,
     },
   });
 
-  const { data, status } = useQuery({
+  const { data } = useQuery({
     queryKey: ["pets", "general", id],
     queryFn: () => get(api.pets.general.$get({ query: { id: String(id) } })),
   });
 
   useEffect(() => {
-    if (data) petsForm.reset(data);
+    if (data) {
+      petsForm.reset({
+        ...(data as z.infer<typeof petGeneralInfoSchema>),
+      });
+    }
   }, [data, petsForm]);
 
   const { mutate, isPending } = useMutation({
@@ -118,7 +135,7 @@ export const GeneralInfo = () => {
 
   return (
     <Form {...petsForm}>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} className="grid sm:grid-cols-2 gap-x-4 gap-y-1">
         <FormField
           control={petsForm.control}
           name="name"
@@ -134,21 +151,17 @@ export const GeneralInfo = () => {
         />
         <FormField
           control={petsForm.control}
-          name="species"
+          name="status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t("species")}</FormLabel>
+              <FormLabel>{t("status")}</FormLabel>
               <Select onValueChange={field.onChange} value={field.value || ""}>
                 <FormControl>
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="dog">{t("dog")}</SelectItem>
-                  <SelectItem value="cat">{t("cat")}</SelectItem>
-                  <SelectItem value="other">{t("other")}</SelectItem>
-                </SelectContent>
+                <StatusOptions />
               </Select>
               <FormMessage />
             </FormItem>
@@ -166,11 +179,25 @@ export const GeneralInfo = () => {
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
-                  <SelectItem value="male">{t("male")}</SelectItem>
-                  <SelectItem value="female">{t("female")}</SelectItem>
-                  <SelectItem value="unknown">{t("unknown")}</SelectItem>
-                </SelectContent>
+                <SexOptions />
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={petsForm.control}
+          name="species"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("species")}</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value || ""}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SpeciesOptions />
               </Select>
               <FormMessage />
             </FormItem>
@@ -189,8 +216,98 @@ export const GeneralInfo = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={petsForm.control}
+          name="bornDate"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("bornDate")}</FormLabel>
+              <FormControl>
+                <DatePicker field={field} locale={language} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={petsForm.control}
+          name="size"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t("size")}</FormLabel>
+              <Select onValueChange={field.onChange} value={field.value || ""}>
+                <FormControl>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SizeOptions />
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex gap-2">
+          <FormField
+            control={petsForm.control}
+            name="weight"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>{t("weight")}</FormLabel>
+                <FormControl>
+                  <Input value={field.value || ""} onChange={field.onChange} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={petsForm.control}
+            name="measurement"
+            render={({ field }) => (
+              <FormItem className="w-24">
+                <FormLabel>{t("measurement")}</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  value={field.value || ""}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Kgs">Kgs</SelectItem>
+                    <SelectItem value="Lbs">Lbs</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormField
+          control={petsForm.control}
+          name="comments"
+          render={({ field }) => (
+            <FormItem className="col-span-full">
+              <FormLabel>{t("comments")}</FormLabel>
+              <FormControl>
+                <Textarea
+                  className="resize-none h-24"
+                  {...field}
+                  value={field.value ?? ""}
+                  onChange={(e) => field.onChange(e.target.value || null)}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-        <SubmitButton disabled={isPending}>{t("saveChanges")}</SubmitButton>
+        <div className="col-span-full">
+          <SubmitButton disabled={isPending}>{t("saveChanges")}</SubmitButton>
+        </div>
       </form>
     </Form>
   );

@@ -35,7 +35,7 @@ export function DatePicker({
           variant="outline"
           id="date"
           className={cn(
-            "w-full justify-between px-3",
+            "w-full justify-between px-3 font-medium",
             date ? "" : " text-muted-foreground"
           )}
         >

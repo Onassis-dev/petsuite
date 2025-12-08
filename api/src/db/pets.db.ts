@@ -1,5 +1,5 @@
 import {
-  decimal,
+  numeric,
   pgTable,
   varchar,
   serial,
@@ -8,16 +8,22 @@ import {
 } from "drizzle-orm/pg-core";
 import { organizationId } from "./auth.db";
 
-export const species = pgEnum("species", ["dog", "cat", "other"]);
-export const sexes = pgEnum("sexes", ["male", "female", "unknown"]);
-export const status = pgEnum("status", [
+export const speciesArray = ["dog", "cat", "other"] as const;
+export const sexesArray = ["male", "female", "unknown"] as const;
+export const statusArray = [
   "available",
   "adopted",
   "deceased",
   "intake",
-]);
-export const size = pgEnum("size", ["small", "medium", "large", "extraLarge"]);
-export const measurements = pgEnum("size", ["Kgs", "Lbs"]);
+] as const;
+export const sizeArray = ["small", "medium", "large", "extraLarge"] as const;
+export const measurementsArray = ["Kgs", "Lbs"] as const;
+
+export const species = pgEnum("species", speciesArray);
+export const sexes = pgEnum("sexes", sexesArray);
+export const status = pgEnum("status", statusArray);
+export const size = pgEnum("size", sizeArray);
+export const measurements = pgEnum("measurements", measurementsArray);
 
 export const pets = pgTable("pets", {
   id: serial().primaryKey().notNull(),
@@ -26,7 +32,7 @@ export const pets = pgTable("pets", {
   name: varchar().notNull(),
   status: status().notNull(),
   size: size(),
-  weigth: decimal(),
+  weight: numeric({ precision: 8, scale: 2 }),
   measurement: measurements(),
   comments: varchar(),
   publicDescription: varchar(),

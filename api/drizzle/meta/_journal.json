@@ -64,6 +64,20 @@
       "when": 1764816299330,
       "tag": "0008_lethal_toxin",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1765221611472,
+      "tag": "0009_mushy_barracuda",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1765222240641,
+      "tag": "0010_rare_beyonder",
+      "breakpoints": true
     }
   ]
 }

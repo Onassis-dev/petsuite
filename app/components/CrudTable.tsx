@@ -23,7 +23,7 @@ import {
 import type { QueryStatus } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/hooks/use-i18n";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { Button } from "./ui/button";
 
 interface props {
@@ -131,7 +131,11 @@ export const CrudTable = ({
                       key={column.key}
                       className={cn(column.hide ? "hidden sm:table-cell" : "")}
                     >
-                      <span>{cellContent as string}</span>
+                      <span>
+                        {column?.transform
+                          ? (column.transform(cellContent) as ReactNode)
+                          : (cellContent as string)}
+                      </span>
                     </TableCell>
                   );
                 })}
