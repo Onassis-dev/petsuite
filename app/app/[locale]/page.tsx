@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { Button } from "@/components/ui/button";
 import { Manrope } from "next/font/google";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const manrope = Manrope({
@@ -59,6 +60,14 @@ export default async function Page({ params }: PageProps) {
       es: "Hecho en México",
       en: "Made in Mexico",
     },
+    signIn: {
+      es: "Iniciar sesión",
+      en: "Sign in",
+    },
+    start: {
+      es: "Comenzar",
+      en: "Get started",
+    },
   });
 
   return (
@@ -71,8 +80,12 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div></div>
             <div className="flex gap-2">
-              <Button variant="ghost">Sign in</Button>
-              <Button>Get started</Button>
+              <Button variant="ghost" asChild>
+                <Link href="/dashboard">{t("signIn")}</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/signup">{t("start")}</Link>
+              </Button>
             </div>
           </div>
         </header>
@@ -84,8 +97,8 @@ export default async function Page({ params }: PageProps) {
             <p className="text-xl text-muted-foreground mt-4 max-w-xl">
               {t("description")}
             </p>
-            <Button className="mt-7" size="lg">
-              {t("getStarted")}
+            <Button className="mt-7" size="lg" asChild>
+              <Link href="/signup">{t("getStarted")}</Link>
             </Button>
 
             <img
