@@ -3,22 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Manrope } from "next/font/google";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Header } from "./Header";
+import { serverI18n } from "@/lib/i18n-server";
 
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
 });
-
-const serverI18n = <K extends string>(
-  language: "es" | "en",
-  texts: Record<K, Record<"es" | "en", string>>
-) => {
-  const t = (key: K) => {
-    return texts[key]?.[language];
-  };
-
-  return t;
-};
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -73,22 +64,7 @@ export default async function Page({ params }: PageProps) {
   return (
     <html>
       <body className={manrope.className}>
-        <header className="fixed top-0 left-0 w-full z-50 flex h-20 items-center">
-          <div className="flex justify-between gap-4 w-full max-w-5xl mx-auto">
-            <div>
-              <p className="text-2xl font-bold">Capupet</p>
-            </div>
-            <div></div>
-            <div className="flex gap-2">
-              <Button variant="ghost" asChild>
-                <Link href="/dashboard">{t("signIn")}</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/signup">{t("start")}</Link>
-              </Button>
-            </div>
-          </div>
-        </header>
+        <Header signInText={t("signIn")} startText={t("start")} />
         <main className="pt-20">
           <section className="flex flex-col max-w-5xl mx-auto mt-28 text-center items-center">
             <h1 className="text-6xl font-bold leading-tight max-w-2xl">
