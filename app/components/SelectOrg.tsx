@@ -84,7 +84,7 @@ export function SelectOrganization() {
             <div className="flex gap-2 col-span-2">
               {session?.user?.owner && (
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
                     router.push("/settings/organization");
@@ -96,7 +96,7 @@ export function SelectOrganization() {
               )}
               {session?.user?.users && (
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
                     router.push("/settings/users");

@@ -127,6 +127,13 @@
       "when": 1765571916505,
       "tag": "0017_dapper_dreadnoughts",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1765937795274,
+      "tag": "0018_spotty_king_bedlam",
+      "breakpoints": true
     }
   ]
 }

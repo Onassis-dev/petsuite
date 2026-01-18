@@ -16,7 +16,7 @@ interface props {
   setOpen: (open: boolean) => void;
   children: React.ReactNode;
   title: string;
-  trigger: string | React.ReactNode;
+  trigger?: string | React.ReactNode;
   submit: () => void;
   isPending: boolean;
   reset: () => void;
@@ -65,7 +65,7 @@ export const ModalForm = ({
           {children}
 
           <DialogFooter className="mt-auto">
-            <Button asChild variant="outline" className="hidden sm:flex">
+            <Button asChild variant="secondary" className="hidden sm:flex">
               <DialogClose disabled={isPending}>{t("close")}</DialogClose>
             </Button>
             {submit && (

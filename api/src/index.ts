@@ -7,6 +7,8 @@ import { petsRoute } from "./routes/pets/pets.route";
 import { adoptersRoute } from "./routes/adopters/adopters.route";
 import { tasksRoute } from "./routes/tasks/tasks.route";
 import { imagesRoute } from "./routes/images/images.route";
+import { websitesRoute } from "./routes/websites/websites.route";
+import { publicRoute } from "./routes/public/public.route";
 
 export type Variables = {
   userId: string;
@@ -36,7 +38,9 @@ const app = new Hono<{ Variables: Variables }>()
   .route("/adopters", adoptersRoute)
   .route("/tasks", tasksRoute)
   .route("/users", usersRoute)
-  .route("/organizations", organizationsRoute);
+  .route("/organizations", organizationsRoute)
+  .route("/websites", websitesRoute)
+  .route("/public", publicRoute);
 
 export default app;
 

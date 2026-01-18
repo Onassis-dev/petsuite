@@ -1,6 +1,6 @@
 {
   "version": "0.0.1",
-  "name": "petsuite.io",
+  "name": "capupet",
   "private": true,
   "scripts": {
     "build": "turbo run build",

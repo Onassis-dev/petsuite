@@ -141,3 +141,22 @@ export const MeasurementOptions = () => {
     </SelectContent>
   );
 };
+
+export const LanguageOptions = () => {
+  const t = useI18n({
+    es: {
+      es: "Español",
+      en: "Spanish",
+    },
+    en: {
+      es: "Inglés",
+      en: "English",
+    },
+  });
+  return (
+    <SelectContent>
+      <SelectItem value="es">{t("es")}</SelectItem>
+      <SelectItem value="en">{t("en")}</SelectItem>
+    </SelectContent>
+  );
+};

@@ -28,7 +28,6 @@ import {
 import { SizeOptions } from "@/components/ui/select-options";
 import { PetGeneralInfo } from "./queries";
 import { useEffect, useRef } from "react";
-import { NumberInput } from "@/components/ui/custom-inputs";
 
 export const GeneralInfo = ({ data }: { data: PetGeneralInfo }) => {
   const { language } = useLanguage();

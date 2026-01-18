@@ -162,7 +162,7 @@ export default function Page() {
                 <Button
                   disabled={isSelectingPending || !orgId}
                   className="w-full"
-                  variant="outline"
+                  variant="secondary"
                   onClick={() => selectOrg(orgId!)}
                 >
                   {t("selectOrg")}

@@ -2,81 +2,61 @@ import { Hono } from "hono";
 import { validator } from "../../middleware/validation.middleware";
 import { checkPermission } from "../../middleware/auth.middleware";
 import { db } from "../../lib/db";
-import { and, eq, ilike, sql } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { type Variables } from "../..";
-import { getTableColumns } from "drizzle-orm";
-import {
-  createTaskSchema,
-  searchTasksSchema,
-  updateTaskSchema,
-} from "./tasks.schema";
-import { tasks } from "../../db/tasks.db";
-import { deleteSchema } from "../../lib/schemas";
+import { changeUrlSchema, websiteSchema } from "./websites.schema";
+import { websites } from "../../db/websites.db";
 
-export const tasksRoute = new Hono<{ Variables: Variables }>()
-  .use(checkPermission("tasks"))
+export const websitesRoute = new Hono<{ Variables: Variables }>()
+  .use(checkPermission("website"))
 
-  .get("/", validator("query", searchTasksSchema), async (c) => {
-    const data = c.req.valid("query");
+  .get("/", async (c) => {
+    const [website] = await db
+      .select()
+      .from(websites)
+      .where(eq(websites.organizationId, c.get("orgId")));
 
-    const rows = await db
-      .select({
-        ...getTableColumns(tasks),
-        count: sql<number>`count(*) OVER()::integer as count`,
-      })
-      .from(tasks)
-      .where(
-        and(
-          eq(tasks.organizationId, c.get("orgId")),
-          data.text
-            ? ilike(tasks.fts, `%${data.text.toLowerCase()}%`)
-            : undefined
-        )
-      )
-      .limit(10)
-      .offset((data.page - 1) * 10)
-      .orderBy(tasks.id);
-
-    return c.json({
-      rows,
-      count: rows[0]?.count || 0,
-    });
+    return c.json(website || null);
   })
 
-  .post("/", validator("json", createTaskSchema), async (c) => {
+  .post("/url", validator("json", changeUrlSchema), async (c) => {
     const data = c.req.valid("json");
 
-    await db.insert(tasks).values({
-      ...data,
-      organizationId: c.get("orgId"),
-    });
+    const [website] = await db
+      .insert(websites)
+      .values({
+        url: data.url,
+        active: true,
+        organizationId: c.get("orgId"),
+        language: c.get("lang"),
+      })
+      .returning();
 
-    return c.json({});
+    return c.json(website);
   })
 
-  .put("/", validator("json", updateTaskSchema), async (c) => {
+  .put("/", validator("json", websiteSchema), async (c) => {
     const data = c.req.valid("json");
 
     await db
-      .update(tasks)
+      .update(websites)
       .set({
         ...data,
       })
-      .where(
-        and(eq(tasks.id, data.id), eq(tasks.organizationId, c.get("orgId")))
-      );
+      .where(eq(websites.organizationId, c.get("orgId")));
 
     return c.json({});
   })
 
-  .delete("/", validator("json", deleteSchema), async (c) => {
+  .put("/url", validator("json", changeUrlSchema), async (c) => {
     const data = c.req.valid("json");
 
     await db
-      .delete(tasks)
-      .where(
-        and(eq(tasks.id, data.id), eq(tasks.organizationId, c.get("orgId")))
-      );
+      .update(websites)
+      .set({
+        url: data.url,
+      })
+      .where(eq(websites.organizationId, c.get("orgId")));
 
     return c.json({});
   });

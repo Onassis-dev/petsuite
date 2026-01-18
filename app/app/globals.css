@@ -15,25 +15,49 @@
   --color-azure-radiance-800: hsl(220, 68%, 40%);
   --color-azure-radiance-900: hsl(219, 61%, 33%);
   --color-azure-radiance-950: hsl(221, 53%, 21%);
+
+  --color-crusta-50: #fff6ed;
+  --color-crusta-100: #ffebd5;
+  --color-crusta-200: #fdd2ab;
+  --color-crusta-300: #fbb276;
+  --color-crusta-400: #f9873e;
+  --color-crusta-500: #f7732b; /* https://uicolors.app/generate/f7732b */
+  --color-crusta-600: #e74d0f;
+  --color-crusta-700: #c0380e;
+  --color-crusta-800: #982e14;
+  --color-crusta-900: #7b2813;
+  --color-crusta-950: #421108;
+
+  --color-cinnabar-50: #fff1f1;
+  --color-cinnabar-100: #ffe1e1;
+  --color-cinnabar-200: #ffc7c7;
+  --color-cinnabar-300: #ffa1a1;
+  --color-cinnabar-400: #ff6a6a;
+  --color-cinnabar-500: #f72b2b; /* https://uicolors.app/generate/f72b2b */
+  --color-cinnabar-600: #e51d1d;
+  --color-cinnabar-700: #c11414;
+  --color-cinnabar-800: #9f1515;
+  --color-cinnabar-900: #841818;
+  --color-cinnabar-950: #480707;
 }
 
 :root {
-  --background: hsl(0 0% 99.5%);
-  --foreground: hsl(0 0% 25%);
+  --background: #fffdfd;
+  --foreground: #3d3d3d;
   --card: hsl(0 0% 99%);
   --card-foreground: hsl(0 0% 12%);
-  --primary: var(--color-azure-radiance-600);
+  --primary: var(--color-crusta-500);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: var(--color-gray-100);
-  --secondary-foreground: var(--color-gray-500);
+  --secondary: #f6f6f6;
+  --secondary-foreground: #636363;
   --muted: hsl(0 0% 93%);
-  --muted-foreground: hsl(0 0% 39%);
-  --accent: hsl(0 0% 91%);
+  --muted-foreground: #636363;
+  --accent: #e8e8e8;
   --accent-foreground: hsl(0 0% 12%);
-  --destructive: var(--color-red-500);
+  --destructive: var(--color-cinnabar-500);
   --border: hsl(0 0% 91%);
   --input: hsl(0 0% 91%);
-  --ring: var(--color-azure-radiance-300);
+  --ring: var(--color-crusta-300);
   --chart-1: hsl(17 22% 32%);
   --chart-2: hsl(35 100% 85%);
   --chart-3: hsl(0 0% 91%);
@@ -41,8 +65,8 @@
   --chart-5: hsl(17 22% 32%);
   --sidebar: #f6f6f6;
   --sidebar-foreground: #505050;
-  --sidebar-primary: var(--color-azure-radiance-100);
-  --sidebar-primary-foreground: var(--color-azure-radiance-700);
+  --sidebar-primary: var(--color-crusta-100);
+  --sidebar-primary-foreground: var(--color-crusta-700);
   --sidebar-accent: #eeeeee;
 
   --radius: 0.5rem;

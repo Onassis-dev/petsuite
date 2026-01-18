@@ -1,110 +1,218 @@
 "use client";
 
-import { useFilter } from "@/hooks/use-filter";
-import { usePagination } from "@/hooks/use-pagination";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
+import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api, get } from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
-import PaginationMenu from "@/components/PaginationMenu";
-import { OptionsGrid } from "@/components/ui/grids";
-import { SearchInput } from "@/components/ui/custom-inputs";
-import { CrudTable } from "@/components/CrudTable";
-import { useSelectedRow } from "@/hooks/use-selected-row";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import DeleteDialog from "@/components/DeleteDialog";
 import { useI18n } from "@/hooks/use-i18n";
-import { TasksForm } from "./TasksForm";
+import { ChangeUrl } from "./changeUrl";
 import { PageWrapper } from "@/components/PageWrapper";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { websiteSchema } from "@server/routes/websites/websites.schema";
+import { useForm } from "react-hook-form";
+import z from "zod/v4";
+import { showSuccess } from "@/lib/toast";
+import { Textarea } from "@/components/ui/textarea";
+import { LanguageOptions } from "@/components/ui/select-options";
+import { Switch } from "@/components/ui/switch";
+import { SubmitButton } from "@/components/ui/custom-buttons";
+import { CreateWebsite } from "./CreateWebsite";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupText,
+} from "@/components/ui/input-group";
+import { Button } from "@/components/ui/button";
+import { PencilIcon, ShareIcon, SquareArrowOutUpRightIcon } from "lucide-react";
+
+type Website = z.infer<typeof websiteSchema>;
 
 export default function Page() {
   const t = useI18n({
-    title: {
-      es: "Título",
-      en: "Title",
-    },
-    due: {
-      es: "Fecha",
-      en: "Due",
-    },
-    deleteTitle: {
-      es: "Eliminar tarea",
-      en: "Delete Task",
-    },
-    deleteText: {
-      es: "¿Estás seguro de querer eliminar esta tarea?",
-      en: "Are you sure you want to delete this task?",
-    },
-    deleteSuccessMessage: {
-      es: "Tarea eliminada correctamente",
-      en: "Task deleted successfully",
-    },
     pageTitle: {
-      es: "Tareas",
-      en: "Tasks",
+      es: "Sitio web",
+      en: "Website",
+    },
+    websiteUpdated: {
+      es: "Sitio web actualizado",
+      en: "Website updated",
+    },
+    description: {
+      es: "Descripción",
+      en: "Description",
+    },
+    language: {
+      es: "Idioma",
+      en: "Language",
+    },
+    active: {
+      es: "Activo",
+      en: "Active",
+    },
+    saveChanges: {
+      es: "Guardar cambios",
+      en: "Save changes",
+    },
+    edit: {
+      es: "Editar",
+      en: "Edit",
+    },
+    visit: {
+      es: "Visitar",
+      en: "Visit",
+    },
+    share: {
+      es: "Compartir",
+      en: "Share",
     },
   });
 
-  const { page, setPage } = usePagination();
-  const { filter, setFilter, debouncedFilter } = useFilter(() => setPage(1));
-  const { selectedRow, setSelectedRow } = useSelectedRow();
-  const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
 
   const { data, status } = useQuery({
-    queryKey: ["tasks", debouncedFilter, page],
-    queryFn: () =>
-      get(
-        api.tasks.$get({
-          query: { text: debouncedFilter, page: String(page) },
-        })
-      ),
+    queryKey: ["websites"],
+    queryFn: () => get(api.websites.$get()),
   });
+
+  const websitesForm = useForm<Website>({
+    resolver: zodResolver(websiteSchema),
+    values: data,
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async function sendData(values: Website) {
+      await get(api.websites.$put({ json: values }));
+      showSuccess(t("websiteUpdated"));
+    },
+  });
+
+  const submit = websitesForm.handleSubmit((values: Website) => mutate(values));
+
+  if (status === "success" && !data)
+    return (
+      <PageWrapper title={t("pageTitle")} size="sm">
+        <CreateWebsite />
+      </PageWrapper>
+    );
+
   return (
-    <PageWrapper title={t("pageTitle")} size="md">
-      <OptionsGrid>
-        <SearchInput
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        />
+    <PageWrapper title={t("pageTitle")} size="sm">
+      <ChangeUrl open={openEdit} setOpen={setOpenEdit} />
 
-        <TasksForm
-          open={openEdit}
-          setOpen={setOpenEdit}
-          setSelectedTask={setSelectedRow}
-          task={selectedRow}
-        />
-      </OptionsGrid>
+      <Form {...websitesForm}>
+        <form onSubmit={submit} className="gap-4">
+          <FormItem>
+            <FormLabel>Url</FormLabel>
+            <FormControl>
+              <InputGroup>
+                <InputGroupAddon>
+                  <InputGroupText>capupet.com/</InputGroupText>
+                </InputGroupAddon>
+                <InputGroupInput value={data?.url || ""} readOnly />
+              </InputGroup>
+            </FormControl>
+            <div className="grid grid-cols-3 gap-2 pt-2 pb-6">
+              <Button
+                variant="secondary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setOpenEdit(true);
+                }}
+              >
+                <PencilIcon className="size-4" />
+                {t("edit")}
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(
+                    window.location.origin + "/" + data?.url,
+                    "_blank"
+                  );
+                }}
+              >
+                <SquareArrowOutUpRightIcon className="size-4" />
+                {t("visit")}
+              </Button>
+              <Button variant="secondary">
+                <ShareIcon className="size-4" />
+                {t("share")}
+              </Button>
+            </div>
+          </FormItem>
 
-      <CrudTable
-        rows={data?.rows}
-        status={status}
-        columns={[{ key: "title", title: t("title") }]}
-        selectRow={setSelectedRow}
-        setOpenDelete={setOpenDelete}
-        setOpenEdit={setOpenEdit}
-        onRowClick={(row) => {
-          setSelectedRow(row);
-          setOpenEdit(true);
-        }}
-      />
+          <FormField
+            control={websitesForm.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("description")}</FormLabel>
+                <FormControl>
+                  <Textarea
+                    className="resize-none min-h-24"
+                    value={field.value ?? ""}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={websitesForm.control}
+            name="language"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("language")}</FormLabel>
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <LanguageOptions />
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <PaginationMenu
-        page={Number(page)}
-        setPage={setPage}
-        count={data?.count}
-      />
+          <FormField
+            control={websitesForm.control}
+            name="active"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("active")}</FormLabel>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-      <DeleteDialog
-        title={t("deleteTitle")}
-        action="delete"
-        text={t("deleteText")}
-        open={openDelete}
-        setOpen={setOpenDelete}
-        queryKey="tasks"
-        deleteFunction={() =>
-          get(api.tasks.$delete({ json: { id: Number(selectedRow?.id) } }))
-        }
-        successMessage={t("deleteSuccessMessage")}
-      />
+          <div className="col-span-full">
+            <SubmitButton disabled={isPending}>{t("saveChanges")}</SubmitButton>
+          </div>
+        </form>
+      </Form>
     </PageWrapper>
   );
 }
