@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,6 +19,14 @@ import { useI18n } from "@/hooks/use-i18n";
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-sm mt-12 sm:mt-32" />}>
+      <VerifyEmailContent />
+    </Suspense>
+  );
+}
+
+function VerifyEmailContent() {
   const t = useI18n({
     verifyEmail: {
       es: "Verifica tu correo",

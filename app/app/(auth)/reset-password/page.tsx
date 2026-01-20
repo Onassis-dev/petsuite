@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,6 +22,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 export default function Page() {
+  return (
+    <Suspense fallback={<div className="w-full max-w-sm mt-12 sm:mt-32" />}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}
+
+function ResetPasswordContent() {
   const t = useI18n({
     passwordMinLength: {
       es: "La contraseña debe tener al menos 8 caracteres",
