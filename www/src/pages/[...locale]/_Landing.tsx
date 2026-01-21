@@ -281,7 +281,7 @@ export function Landing({ locale }: { locale: "es" | "en" }) {
         <Header signInText={t("signIn")} startText={t("start")} />
         <main className="pt-20">
           {/* Hero Section */}
-          <section className="flex flex-col max-w-5xl mx-auto mt-28 text-center items-center px-4">
+          <section className="flex flex-col max-w-5xl mx-auto mt-12 sm:mt-28 text-center items-center px-4">
             <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-2xl">
               {t("title")}
             </h1>

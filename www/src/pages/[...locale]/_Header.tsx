@@ -23,7 +23,7 @@ export function Header({ signInText, startText }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 flex h-20 items-center bg-background transition-[border-color] ${
+      className={`fixed top-0 left-0 w-full z-50 flex h-16 sm:h-18 items-center bg-background transition-[border-color] ${
         isScrolled ? "border-b" : "border-b border-transparent"
       }`}
     >
@@ -33,7 +33,7 @@ export function Header({ signInText, startText }: HeaderProps) {
         </div>
         <div></div>
         <div className="flex gap-2">
-          <Button variant="ghost" asChild>
+          <Button variant="ghost" asChild className="hidden sm:block">
             <a href="/dashboard">{signInText}</a>
           </Button>
           <Button asChild>
