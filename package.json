@@ -23,7 +23,8 @@
       "@swc/core",
       "core-js-pure",
       "esbuild",
-      "sharp"
+      "sharp",
+      "workerd"
     ]
   },
   "dependencies": {
