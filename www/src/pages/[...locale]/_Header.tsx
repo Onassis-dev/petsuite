@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@workspace/ui/components/ui/button";
 import { useEffect, useState } from "react";
 
