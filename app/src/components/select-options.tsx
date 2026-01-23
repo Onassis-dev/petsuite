@@ -160,3 +160,102 @@ export const LanguageOptions = () => {
     </SelectContent>
   );
 };
+
+export const ColorOptions = () => {
+  const t = useI18n({
+    black: {
+      es: "Negro",
+      en: "Black",
+    },
+    red: {
+      es: "Rojo",
+      en: "Red",
+    },
+    blue: {
+      es: "Azul",
+      en: "Blue",
+    },
+    green: {
+      es: "Verde",
+      en: "Green",
+    },
+    yellow: {
+      es: "Amarillo",
+      en: "Yellow",
+    },
+    purple: {
+      es: "Morado",
+      en: "Purple",
+    },
+    orange: {
+      es: "Naranja",
+      en: "Orange",
+    },
+    pink: {
+      es: "Rosa",
+      en: "Pink",
+    },
+  });
+
+  return (
+    <SelectContent>
+      <SelectItem value="black">
+        <div className="bg-neutral-700 size-3 rounded-full" />
+        {t("black")}
+      </SelectItem>
+      <SelectItem value="red">
+        <div className="bg-red-400 size-3 rounded-full" />
+        {t("red")}
+      </SelectItem>
+      <SelectItem value="blue">
+        <div className="bg-blue-400 size-3 rounded-full" />
+        {t("blue")}
+      </SelectItem>
+      <SelectItem value="green">
+        <div className="bg-green-400 size-3 rounded-full" />
+        {t("green")}
+      </SelectItem>
+      <SelectItem value="yellow">
+        <div className="bg-yellow-400 size-3 rounded-full" />
+        {t("yellow")}
+      </SelectItem>
+      <SelectItem value="purple">
+        <div className="bg-purple-400 size-3 rounded-full" />
+        {t("purple")}
+      </SelectItem>
+      <SelectItem value="orange">
+        <div className="bg-orange-400 size-3 rounded-full" />
+        {t("orange")}
+      </SelectItem>
+      <SelectItem value="pink">
+        <div className="bg-pink-400 size-3 rounded-full" />
+        {t("pink")}
+      </SelectItem>
+    </SelectContent>
+  );
+};
+
+export const StyleOptions = () => {
+  const t = useI18n({
+    modern: {
+      es: "Moderno",
+      en: "Modern",
+    },
+    minimalist: {
+      es: "Minimalista",
+      en: "Minimalist",
+    },
+    friendly: {
+      es: "Amigable",
+      en: "Friendly",
+    },
+  });
+
+  return (
+    <SelectContent>
+      <SelectItem value="modern">{t("modern")}</SelectItem>
+      <SelectItem value="minimalist">{t("minimalist")}</SelectItem>
+      <SelectItem value="friendly">{t("friendly")}</SelectItem>
+    </SelectContent>
+  );
+};

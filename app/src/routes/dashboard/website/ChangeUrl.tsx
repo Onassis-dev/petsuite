@@ -29,7 +29,7 @@ interface props {
 }
 
 const defaultValues: z.infer<typeof changeUrlSchema> = {
-  url: "",
+  slug: "",
 };
 
 export const ChangeUrl = ({ open, setOpen }: props) => {
@@ -37,16 +37,16 @@ export const ChangeUrl = ({ open, setOpen }: props) => {
 
   const t = useI18n({
     title: {
-      es: "Actualizar url",
-      en: "Update url",
+      es: "Actualizar slug",
+      en: "Update slug",
     },
     alert: {
-      es: "Cambiar la url tiene los siguientes efectos:",
-      en: "Changing the url has the following effects:",
+      es: "Cambiar el slug tiene los siguientes efectos:",
+      en: "Changing the slug has the following effects:",
     },
   });
 
-  const urlForm = useForm<z.infer<typeof changeUrlSchema>>({
+  const slugForm = useForm<z.infer<typeof changeUrlSchema>>({
     resolver: zodResolver(changeUrlSchema),
     defaultValues: defaultValues,
   });
@@ -55,17 +55,17 @@ export const ChangeUrl = ({ open, setOpen }: props) => {
     mutationFn: async function sendData(
       values: z.infer<typeof changeUrlSchema>
     ) {
-      await get(api.websites.url.$put({ json: { ...values } }));
+      await get(api.websites.slug.$put({ json: { ...values } }));
 
       client.setQueryData(["websites"], (old: object) => ({
         ...old,
-        url: values.url,
+        slug: values.slug,
       }));
       setOpen(false);
     },
   });
 
-  const submit = urlForm.handleSubmit(
+  const submit = slugForm.handleSubmit(
     (values: z.infer<typeof changeUrlSchema>) => mutate(values)
   );
 
@@ -76,9 +76,9 @@ export const ChangeUrl = ({ open, setOpen }: props) => {
       title={t("title")}
       submit={submit}
       isPending={isPending}
-      reset={() => urlForm.reset(defaultValues)}
+      reset={() => slugForm.reset(defaultValues)}
     >
-      <Form {...urlForm}>
+      <Form {...slugForm}>
         <form onSubmit={submit}>
           <Alert variant="destructive">
             <TriangleAlertIcon strokeWidth={1.8} />
@@ -86,8 +86,8 @@ export const ChangeUrl = ({ open, setOpen }: props) => {
           </Alert>
 
           <FormField
-            control={urlForm.control}
-            name="url"
+            control={slugForm.control}
+            name="slug"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>{t("title")}</FormLabel>

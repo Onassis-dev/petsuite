@@ -21,7 +21,7 @@ const app = new Hono<{ Variables: Variables }>()
   .use(
     "*",
     cors({
-      origin: [process.env.APP_ORIGIN!],
+      origin: [process.env.APP_ORIGIN!, process.env.PUBLIC_ORIGIN!],
       allowHeaders: ["Content-Type", "Authorization"],
       allowMethods: ["POST", "GET", "OPTIONS", "PUT", "DELETE"],
       exposeHeaders: ["Content-Length", "X-ORG"],

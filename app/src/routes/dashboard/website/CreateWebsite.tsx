@@ -27,14 +27,14 @@ export const CreateWebsite = () => {
       es: "Guardar",
       en: "Save",
     },
-    urlDescription: {
-      es: "Elige una url para comenzar a usar tu sitio web. Debe ser concisa y no usar espacios, esta sera la url publica de tu sitio web.",
-      en: "Choose a url to start using your website. It must be concise and not use spaces, this will be the public url of your website.",
+    slugDescription: {
+      es: "Elige un slug para comenzar a usar tu sitio web. Debe ser conciso y no usar espacios, este sera el slug publico de tu sitio web.",
+      en: "Choose a slug to start using your website. It must be concise and not use spaces, this will be the public slug of your website.",
     },
   });
   const client = useQueryClient();
 
-  const urlForm = useForm<z.infer<typeof changeUrlSchema>>({
+  const slugForm = useForm<z.infer<typeof changeUrlSchema>>({
     resolver: zodResolver(changeUrlSchema),
   });
 
@@ -42,24 +42,24 @@ export const CreateWebsite = () => {
     mutationFn: async function sendData(
       values: z.infer<typeof changeUrlSchema>
     ) {
-      const res = await get(api.websites.url.$post({ json: values }));
+      const res = await get(api.websites.slug.$post({ json: values }));
       client.setQueryData(["websites"], res);
     },
   });
 
-  const submit = urlForm.handleSubmit(
+  const submit = slugForm.handleSubmit(
     (values: z.infer<typeof changeUrlSchema>) => mutate(values)
   );
 
   return (
-    <Form {...urlForm}>
+    <Form {...slugForm}>
       <form onSubmit={submit} className="">
         <FormField
-          control={urlForm.control}
-          name="url"
+          control={slugForm.control}
+          name="slug"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Url</FormLabel>
+              <FormLabel>Slug</FormLabel>
               <FormControl>
                 <InputGroup>
                   <InputGroupAddon>
@@ -76,7 +76,7 @@ export const CreateWebsite = () => {
               </FormControl>
               <FormMessage />
               <p className="text-sm text-muted-foreground mb-6">
-                {t("urlDescription")}
+                {t("slugDescription")}
               </p>
             </FormItem>
           )}

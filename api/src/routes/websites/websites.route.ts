@@ -19,16 +19,18 @@ export const websitesRoute = new Hono<{ Variables: Variables }>()
     return c.json(website || null);
   })
 
-  .post("/url", validator("json", changeUrlSchema), async (c) => {
+  .post("/slug", validator("json", changeUrlSchema), async (c) => {
     const data = c.req.valid("json");
 
     const [website] = await db
       .insert(websites)
       .values({
-        url: data.url,
+        slug: data.slug,
         active: true,
         organizationId: c.get("orgId"),
         language: c.get("lang"),
+        color: "black",
+        style: "friendly",
       })
       .returning();
 
@@ -48,13 +50,13 @@ export const websitesRoute = new Hono<{ Variables: Variables }>()
     return c.json({});
   })
 
-  .put("/url", validator("json", changeUrlSchema), async (c) => {
+  .put("/slug", validator("json", changeUrlSchema), async (c) => {
     const data = c.req.valid("json");
 
     await db
       .update(websites)
       .set({
-        url: data.url,
+        slug: data.slug,
       })
       .where(eq(websites.organizationId, c.get("orgId")));
 

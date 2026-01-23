@@ -100,7 +100,7 @@ export default function PetsPage() {
   });
 
   return (
-    <PageWrapper title={t("title")} size="lg">
+    <PageWrapper title={t("title")} size="md">
       <OptionsGrid>
         <SearchInput
           value={filter}

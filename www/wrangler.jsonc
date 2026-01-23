@@ -12,5 +12,8 @@
 	},
 	"observability": {
     "enabled": true
+  },
+  "env": {
+    "API_ORIGIN": "https://api.capupet.com"
   }
 }

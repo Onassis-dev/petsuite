@@ -23,7 +23,11 @@ import { useForm } from "react-hook-form";
 import z from "zod/v4";
 import { showSuccess } from "@/lib/toast";
 import { Textarea } from "@workspace/ui/components/ui/textarea";
-import { LanguageOptions } from "@/components/select-options";
+import {
+  ColorOptions,
+  LanguageOptions,
+  StyleOptions,
+} from "@/components/select-options";
 import { Switch } from "@workspace/ui/components/ui/switch";
 import { SubmitButton } from "@/components/custom-buttons";
 import { CreateWebsite } from "./CreateWebsite";
@@ -76,6 +80,14 @@ export default function WebsitePage() {
       es: "Compartir",
       en: "Share",
     },
+    color: {
+      es: "Color",
+      en: "Color",
+    },
+    style: {
+      es: "Estilo",
+      en: "Style",
+    },
   });
 
   const [openEdit, setOpenEdit] = useState(false);
@@ -113,13 +125,13 @@ export default function WebsitePage() {
       <Form {...websitesForm}>
         <form onSubmit={submit} className="gap-4">
           <FormItem>
-            <FormLabel>Url</FormLabel>
+            <FormLabel>Slug</FormLabel>
             <FormControl>
               <InputGroup>
                 <InputGroupAddon>
                   <InputGroupText>capupet.com/</InputGroupText>
                 </InputGroupAddon>
-                <InputGroupInput value={data?.url || ""} readOnly />
+                <InputGroupInput value={data?.slug || ""} readOnly />
               </InputGroup>
             </FormControl>
             <div className="grid grid-cols-3 gap-2 pt-2 pb-6">
@@ -138,7 +150,7 @@ export default function WebsitePage() {
                 onClick={(e) => {
                   e.preventDefault();
                   window.open(
-                    window.location.origin + "/" + data?.url,
+                    window.location.origin + "/" + data?.slug,
                     "_blank"
                   );
                 }}
@@ -187,6 +199,52 @@ export default function WebsitePage() {
                     </SelectTrigger>
                   </FormControl>
                   <LanguageOptions />
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="color"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("color")}</FormLabel>
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <ColorOptions />
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="style"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("style")}</FormLabel>
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <StyleOptions />
                 </Select>
                 <FormMessage />
               </FormItem>
