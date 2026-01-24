@@ -1,8 +1,5 @@
 ---
-import UGCLayout from "../../../layouts/UGCLayout.astro";
-import { PetsList } from "../PetsList";
-import { containerStyle } from "./styles";
-
+import { MainUGC } from "@workspace/ui/components/ugc/MainUGC";
 const { slug } = Astro.params;
 
 let website: any;
@@ -19,41 +16,9 @@ try {
 }
 ---
 
-<UGCLayout
-  title={website.title}
-  locale={website.lang}
-  description={website.description}
->
-  <main class={containerStyle(website.style)}>
-    <div class="mb-8 text-center">
-      {
-        website.image && (
-          <img
-            src={website.image}
-            alt={website.title}
-            class="w-24 h-24 mx-auto mb-4 rounded-full object-cover shadow-lg"
-          />
-        )
-      }
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        {website.title}
-      </h1>
-      {
-        website.description && (
-          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            {website.description}
-          </p>
-        )
-      }
-    </div>
-
-    <PetsList
-      client:only
-      slug={slug!}
-      locale={website.lang}
-      apiOrigin={import.meta.env.API_ORIGIN}
-      style={website.style}
-      color={website.color}
-    />
-  </main>
-</UGCLayout>
+<MainUGC
+  client:load
+  website={website}
+  apiOrigin={import.meta.env.API_ORIGIN}
+  slug={slug!}
+/>

@@ -413,10 +413,10 @@ export function Landing({ locale }: { locale: "es" | "en" }) {
               <span className="text-background/70">
                 {t("by")} <a href="https://onassis.dev">onassis.dev</a> @ 2026
               </span>
-              <span className="flex items-center gap-2 font-semibold">
+              {/* <span className="flex items-center gap-2 font-semibold">
                 <img src="/icons/mx.svg" className="h-5" alt="Mexico" />
                 {t("madeInMexico")}
-              </span>
+              </span> */}
             </div>
           </div>
         </footer>

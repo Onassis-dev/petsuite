@@ -81,6 +81,22 @@ export default function PetsPage() {
       es: "Mascotas",
       en: "Pets",
     },
+    available: {
+      es: "Disponible",
+      en: "Available",
+    },
+    adopted: {
+      es: "Adoptado",
+      en: "Adopted",
+    },
+    deceased: {
+      es: "Fallecido",
+      en: "Deceased",
+    },
+    intake: {
+      es: "En proceso",
+      en: "Intake",
+    },
   });
 
   const { page, setPage } = usePagination();
@@ -178,7 +194,7 @@ export default function PetsPage() {
             title: t("status"),
             hide: true,
             transform: (v) => {
-              return <Badge variant="secondary">{v as string}</Badge>;
+              return <Badge variant="secondary">{t(v as any)}</Badge>;
             },
           },
         ]}
