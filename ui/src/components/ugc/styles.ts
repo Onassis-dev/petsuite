@@ -47,6 +47,20 @@ export function cardStyle(style: string) {
   );
 }
 
+export function listedInformationStyle(style: string) {
+  return defineStyles(
+    {
+      modern:
+        "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
+      minimalist:
+        "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
+      friendly:
+        "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
+    },
+    style
+  );
+}
+
 export function cardImageStyle(style: string) {
   return defineStyles(
     {
@@ -92,5 +106,18 @@ export function buttonColor(color: string) {
     purple: "bg-purple-500! text-white!",
     orange: "bg-orange-500! text-white!",
     pink: "bg-pink-500! text-white!",
+  }[color];
+}
+
+export function iconColor(color: string) {
+  return {
+    black: "text-neutral-700! size-5",
+    red: "text-red-500! size-5",
+    green: "text-green-500! size-5",
+    blue: "text-blue-500! size-5",
+    yellow: "text-yellow-500! size-5",
+    purple: "text-purple-500! size-5",
+    orange: "text-orange-500! size-5",
+    pink: "text-pink-500! size-5",
   }[color];
 }

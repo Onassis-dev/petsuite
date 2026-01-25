@@ -79,11 +79,17 @@ export const publicRoute = new Hono()
         title: organizations.name,
         lang: websites.language,
         image: organizations.logo,
+        color: websites.color,
+        style: websites.style,
         pet: sql<typeof pets.$inferSelect>`(select json_build_object(
         'id', ${pets.id},
         'name', ${pets.name},
         'description', ${pets.publicDescription},
-        'species', ${pets.species},
+        'sex', ${pets.sex},
+        'size', ${pets.size},
+        'weight', ${pets.weight},
+        'measurement', ${pets.measurement},
+        'bornDate', ${pets.bornDate},
         'image', ${pets.image})
         FROM ${pets} 
         WHERE ${pets.organizationId} = ${websites.organizationId} 

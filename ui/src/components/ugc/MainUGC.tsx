@@ -147,7 +147,11 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
             <>
               <div className={listStyle(website.style)}>
                 {pets.map((pet) => (
-                  <div key={pet.id} className={cardStyle(website.style)}>
+                  <a
+                    href={`/ugc/${slug}/${pet.id}`}
+                    key={pet.id}
+                    className={cardStyle(website.style)}
+                  >
                     {pet.image ? (
                       <img
                         src={pet.image}
@@ -171,7 +175,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
                             : pet.sex}
                       </p>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </>

@@ -1,0 +1,19 @@
+---
+import { PetUGC } from "@workspace/ui/components/ugc/PetUGC";
+const { slug, id } = Astro.params;
+
+let website: any;
+
+try {
+  const response = await fetch(
+    `${import.meta.env.API_ORIGIN}/public/pet?slug=${slug}&id=${id}`
+  );
+  if (!response.ok) throw new Error("Website not found");
+  website = await response.json();
+} catch (error) {
+  console.error(error);
+  return Astro.rewrite("/es");
+}
+---
+
+<PetUGC client:load website={website} pet={website.pet} />
