@@ -13,6 +13,7 @@ interface Pet {
   id: string;
   name: string;
   image: string | null;
+  images?: string[];
   description: string | null;
   species: string;
   sex: string;
@@ -31,15 +32,13 @@ export const PetUGC = ({ website, pet }: Props) => {
         <header></header>
 
         <main className="w-full max-w-xl mx-auto px-4 py-16">
-          <section className="flex items-center gap-4 pb-5">
+          <section className="flex items-center gap-4 pb-5 flex-col sm:flex-row">
             <img
               src={pet?.image || "no Image"}
               alt={pet.name}
               className="size-40 aspect-square object-cover rounded-full "
             />
-            <div>
-              <h1 className="text-3xl font-bold">{pet.name}</h1>
-            </div>
+            <h1 className="text-3xl font-bold">{pet.name}</h1>
           </section>
 
           {/* Listed information */}
@@ -85,13 +84,27 @@ export const PetUGC = ({ website, pet }: Props) => {
           </section>
 
           {/* Description */}
-          <section className="mt-10 p-4 rounded-2xl bg-neutral-100">
+          <section className="mt-10 ">
             <h2 className="text-xl font-bold">Sobre {pet.name}</h2>
-            <p className="text-sm mt-2">{pet.description}</p>
+            <p className="mt-2">{pet.description}</p>
           </section>
 
           {/* Gallery */}
-          <section></section>
+          {pet.images && pet.images.length > 0 && (
+            <section className="mt-10">
+              <h2 className="text-xl font-bold mb-4">Galería</h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {pet.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Imagen ${index + 1}`}
+                    className="w-full aspect-square object-cover rounded-xl"
+                  />
+                ))}
+              </div>
+            </section>
+          )}
         </main>
 
         <footer></footer>

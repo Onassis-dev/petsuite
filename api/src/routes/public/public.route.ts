@@ -90,7 +90,8 @@ export const publicRoute = new Hono()
         'weight', ${pets.weight},
         'measurement', ${pets.measurement},
         'bornDate', ${pets.bornDate},
-        'image', ${pets.image})
+        'image', ${pets.image},
+        'images', COALESCE((SELECT array_agg(url) FROM images WHERE images."petId" = ${pets.id}), '{}'))
         FROM ${pets} 
         WHERE ${pets.organizationId} = ${websites.organizationId} 
         AND ${pets.id} = ${data.id}
@@ -106,6 +107,11 @@ export const publicRoute = new Hono()
 
     if (website.image) website.image = s3.presign(website.image);
     if (website.pet?.image) website.pet.image = s3.presign(website.pet.image);
+    if (website.pet?.images) {
+      website.pet.images = website.pet.images.map((image: string) =>
+        s3.presign(image)
+      );
+    }
 
     return c.json(website);
   });
