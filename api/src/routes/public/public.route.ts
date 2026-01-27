@@ -24,6 +24,15 @@ export const publicRoute = new Hono()
         image: organizations.logo,
         style: websites.style,
         color: websites.color,
+        city: websites.city,
+        instagram: websites.instagram,
+        facebook: websites.facebook,
+        youtube: websites.youtube,
+        email: websites.email,
+        website: websites.website,
+        phone: websites.phone,
+        countryCode: websites.countryCode,
+        contactOption: websites.contactOption,
       })
       .from(websites)
       .innerJoin(organizations, eq(websites.organizationId, organizations.id))
@@ -81,7 +90,9 @@ export const publicRoute = new Hono()
         image: organizations.logo,
         color: websites.color,
         style: websites.style,
-        pet: sql<typeof pets.$inferSelect>`(select json_build_object(
+        pet: sql<
+          typeof pets.$inferSelect & { images: string[] }
+        >`(select json_build_object(
         'id', ${pets.id},
         'name', ${pets.name},
         'description', ${pets.publicDescription},

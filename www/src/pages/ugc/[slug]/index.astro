@@ -1,5 +1,7 @@
 ---
+import UGCLayout from "@/layouts/UGCLayout.astro";
 import { MainUGC } from "@workspace/ui/components/ugc/MainUGC";
+
 const { slug } = Astro.params;
 
 let website: any;
@@ -16,9 +18,11 @@ try {
 }
 ---
 
-<MainUGC
-  client:load
-  website={website}
-  apiOrigin={import.meta.env.API_ORIGIN}
-  slug={slug!}
-/>
+<UGCLayout website={website}>
+  <MainUGC
+    client:load
+    website={website}
+    apiOrigin={import.meta.env.API_ORIGIN}
+    slug={slug!}
+  />
+</UGCLayout>

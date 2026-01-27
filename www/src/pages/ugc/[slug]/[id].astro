@@ -1,4 +1,5 @@
 ---
+import UGCLayout from "@/layouts/UGCLayout.astro";
 import { PetUGC } from "@workspace/ui/components/ugc/PetUGC";
 const { slug, id } = Astro.params;
 
@@ -16,4 +17,6 @@ try {
 }
 ---
 
-<PetUGC client:load website={website} pet={website.pet} />
+<UGCLayout website={website}>
+  <PetUGC client:load website={website} pet={website.pet} slug={slug!} />
+</UGCLayout>

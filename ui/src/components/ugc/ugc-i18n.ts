@@ -13,14 +13,6 @@ const texts = {
     es: "Gatos",
     en: "Cats",
   },
-  previous: {
-    es: "Anterior",
-    en: "Previous",
-  },
-  next: {
-    es: "Siguiente",
-    en: "Next",
-  },
   other: {
     es: "Otros",
     en: "Others",
@@ -44,6 +36,74 @@ const texts = {
   noPetsFound: {
     es: "No se encontraron mascotas",
     en: "No pets found",
+  },
+  small: {
+    es: "Pequeño",
+    en: "Small",
+  },
+  medium: {
+    es: "Mediano",
+    en: "Medium",
+  },
+  large: {
+    es: "Grande",
+    en: "Large",
+  },
+  extraLarge: {
+    es: "Extra grande",
+    en: "Extra large",
+  },
+  year: {
+    es: "año",
+    en: "year",
+  },
+  years: {
+    es: "años",
+    en: "years",
+  },
+  month: {
+    es: "mes",
+    en: "month",
+  },
+  months: {
+    es: "meses",
+    en: "months",
+  },
+  age: {
+    es: "Edad",
+    en: "Age",
+  },
+  weight: {
+    es: "Peso",
+    en: "Weight",
+  },
+  sex: {
+    es: "Sexo",
+    en: "Sex",
+  },
+  size: {
+    es: "Tamaño",
+    en: "Size",
+  },
+  description: {
+    es: "Descripción",
+    en: "Description",
+  },
+  gallery: {
+    es: "Galería",
+    en: "Gallery",
+  },
+  about: {
+    es: "Acerca de",
+    en: "About",
+  },
+  and: {
+    es: "y",
+    en: "and",
+  },
+  back: {
+    es: "Volver",
+    en: "Back",
   },
 } as const satisfies Record<string, Record<Lang, string>>;
 

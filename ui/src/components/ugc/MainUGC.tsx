@@ -9,9 +9,10 @@ import {
   listStyle,
   titleStyle,
 } from "./styles";
-import { LayoutUGC } from "./LayoutUGC";
 import { ugcI18n } from "./ugc-i18n";
 import { Website } from "./types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FooterUGC } from "./FooterUGC";
 
 interface Props {
   website: Website;
@@ -84,7 +85,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
   const speciesOptions = ["dog", "cat", "other"];
 
   return (
-    <LayoutUGC website={website}>
+    <>
       <main className={containerStyle(website.style)}>
         <div className="mb-12">
           {website.image && (
@@ -188,7 +189,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
               disabled={page === 1}
               className={`${buttonStyle(website.style)}`}
             >
-              {t("previous")}
+              <ChevronLeft className="size-5" />
             </button>
 
             <div className="flex gap-1">
@@ -225,11 +226,13 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
               disabled={page === totalPages}
               className={`${buttonStyle(website.style)}`}
             >
-              {t("next")}
+              <ChevronRight className="size-5" />
             </button>
           </div>
         </section>
       </main>
-    </LayoutUGC>
+
+      <FooterUGC website={website} slug={slug} />
+    </>
   );
 };

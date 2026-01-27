@@ -1,0 +1,77 @@
+---
+import type { Website } from "@workspace/ui/components/ugc/types.ts";
+import "@workspace/ui/globals.css";
+
+interface Props {
+  website: Website;
+}
+
+const { website } = Astro.props;
+---
+
+<html lang={website.lang} style={{ overflowY: "scroll" }}>
+  <head>
+    <meta charset="utf-8" />
+
+    {
+      website.style === "friendly" && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+            rel="stylesheet"
+          />
+        </>
+      )
+    }
+    {
+      website.style === "minimalist" && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+          />
+        </>
+      )
+    }
+    {
+      website.style === "modern" && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+            rel="stylesheet"
+          />
+        </>
+      )
+    }
+
+    <meta name="viewport" content="width=device-width" />
+    <title>{website.title}</title>
+    <meta name="description" content={website.description} />
+  </head>
+  <body
+    class="@container min-h-screen flex flex-col"
+    style={{
+      fontFamily: "Manrope, Inter, Outfit, sans-serif",
+    }}
+  >
+    <slot />
+  </body>
+</html>

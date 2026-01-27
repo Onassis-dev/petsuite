@@ -25,6 +25,7 @@ import { showSuccess } from "@/lib/toast";
 import { Textarea } from "@workspace/ui/components/ui/textarea";
 import {
   ColorOptions,
+  ContactOptionOptions,
   LanguageOptions,
   StyleOptions,
 } from "@/components/select-options";
@@ -38,7 +39,20 @@ import {
   InputGroupText,
 } from "@workspace/ui/components/ui/input-group";
 import { Button } from "@workspace/ui/components/ui/button";
-import { PencilIcon, ShareIcon, SquareArrowOutUpRightIcon } from "lucide-react";
+import {
+  GlobeIcon,
+  PencilIcon,
+  ShareIcon,
+  SquareArrowOutUpRightIcon,
+} from "lucide-react";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  YouTubeIcon,
+} from "@workspace/ui/components/icons";
+import { MailIcon } from "lucide-react";
+import PhoneInput from "@/components/phone-input";
+import { Input } from "@workspace/ui/components/ui/input";
 
 type Website = z.infer<typeof websiteSchema>;
 
@@ -87,6 +101,26 @@ export default function WebsitePage() {
     style: {
       es: "Estilo",
       en: "Style",
+    },
+    email: {
+      es: "Email",
+      en: "Email",
+    },
+    website: {
+      es: "Sitio web",
+      en: "Website",
+    },
+    socials: {
+      es: "Redes sociales",
+      en: "Socials",
+    },
+    phone: {
+      es: "Teléfono",
+      en: "Phone",
+    },
+    contactOptions: {
+      es: "Boton de adopción",
+      en: "Adoption button",
     },
   });
 
@@ -245,6 +279,178 @@ export default function WebsitePage() {
                     </SelectTrigger>
                   </FormControl>
                   <StyleOptions />
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="instagram"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("socials")}</FormLabel>
+
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <InstagramIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder="Instagram"
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="facebook"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <FacebookIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder="Facebook"
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="youtube"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <YouTubeIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder="YouTube"
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <MailIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder={t("email")}
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="website"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <InputGroup>
+                    <InputGroupAddon>
+                      <GlobeIcon className="size-4 mr-1" />
+                    </InputGroupAddon>
+                    <InputGroupInput
+                      placeholder={t("website")}
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormLabel>{t("phone")}</FormLabel>
+          <div className="flex w-full">
+            <FormField
+              control={websitesForm.control}
+              name="countryCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <PhoneInput
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      className="pl-2 pr-1 w-16 justify-end rounded-r-none"
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={websitesForm.control}
+              name="phone"
+              render={({ field }) => (
+                <>
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <Input
+                        value={field.value || ""}
+                        onChange={field.onChange}
+                        className="rounded-l-none border-l-0"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                </>
+              )}
+            />
+          </div>
+
+          <FormField
+            control={websitesForm.control}
+            name="contactOption"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("contactOptions")}</FormLabel>
+                <Select
+                  key={field.value}
+                  onValueChange={field.onChange}
+                  value={field.value || undefined}
+                >
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <ContactOptionOptions />
                 </Select>
                 <FormMessage />
               </FormItem>

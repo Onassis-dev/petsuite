@@ -7,7 +7,9 @@ import {
   DogIcon,
   MarsIcon,
   VenusIcon,
+  MailIcon,
 } from "lucide-react";
+import { WhatsAppIcon } from "@workspace/ui/components/icons";
 
 export const SpeciesOptions = () => {
   const t = useI18n({
@@ -256,6 +258,27 @@ export const StyleOptions = () => {
       <SelectItem value="modern">{t("modern")}</SelectItem>
       <SelectItem value="minimalist">{t("minimalist")}</SelectItem>
       <SelectItem value="friendly">{t("friendly")}</SelectItem>
+    </SelectContent>
+  );
+};
+
+export const ContactOptionOptions = () => {
+  const t = useI18n({
+    email: {
+      es: "Email",
+      en: "Email",
+    },
+  });
+
+  return (
+    <SelectContent>
+      <SelectItem value="whatsapp">
+        <WhatsAppIcon className="size-4" /> WhatsApp
+      </SelectItem>
+      <SelectItem value="email">
+        <MailIcon className="size-4" />
+        {t("email")}
+      </SelectItem>
     </SelectContent>
   );
 };
