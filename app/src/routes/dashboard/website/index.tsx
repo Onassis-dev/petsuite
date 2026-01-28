@@ -70,6 +70,10 @@ export default function WebsitePage() {
       es: "Descripción",
       en: "Description",
     },
+    city: {
+      es: "Ciudad",
+      en: "City",
+    },
     language: {
       es: "Idioma",
       en: "Language",
@@ -211,6 +215,20 @@ export default function WebsitePage() {
                     value={field.value ?? ""}
                     onChange={field.onChange}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={websitesForm.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t("city")}</FormLabel>
+                <FormControl>
+                  <Input value={field.value ?? ""} onChange={field.onChange} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

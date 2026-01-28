@@ -64,7 +64,7 @@ export const PetUGC = ({ website, pet, slug }: Props) => {
     <>
       <HeaderUGC website={website} slug={slug} />
 
-      <main className="w-full max-w-xl mx-auto px-4 py-16">
+      <main className="w-full max-w-xl mx-auto px-4 pt-16 pb-24">
         <section className="flex items-center gap-4 pb-5 flex-col">
           <img
             src={pet?.image || "no Image"}

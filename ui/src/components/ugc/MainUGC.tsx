@@ -97,9 +97,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
           )}
           <h1 className={titleStyle(website.style)}>{website.title}</h1>
           {website.description && (
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              {website.description}
-            </p>
+            <p className="text-lg text-gray-600">{website.description}</p>
           )}
         </div>
 

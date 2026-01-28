@@ -17,9 +17,9 @@ export function titleStyle(style: string) {
 export function containerStyle(style: string) {
   return defineStyles(
     {
-      modern: "w-full max-w-5xl mx-auto px-4 py-8",
-      minimalist: "w-full max-w-3xl mx-auto px-4 py-8",
-      friendly: "w-full max-w-5xl mx-auto px-4 py-8",
+      modern: "w-full max-w-5xl mx-auto px-4 pt-8 pb-24",
+      minimalist: "w-full max-w-3xl mx-auto px-4 pt-8 pb-24",
+      friendly: "w-full max-w-5xl mx-auto px-4 pt-8 pb-24",
     },
     style
   );

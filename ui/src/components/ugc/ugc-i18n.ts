@@ -113,6 +113,10 @@ const texts = {
     es: "Me gustaria saber mas sobre",
     en: "I would like to know more about",
   },
+  websiteBy: {
+    es: "Un proyecto de",
+    en: "A project by",
+  },
 } as const satisfies Record<string, Record<Lang, string>>;
 
 export const ugcI18n = (language: Lang) => {

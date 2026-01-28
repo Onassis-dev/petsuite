@@ -90,6 +90,7 @@ export const publicRoute = new Hono()
         image: organizations.logo,
         color: websites.color,
         style: websites.style,
+        city: websites.city,
         contactOption: websites.contactOption,
         countryCode: websites.countryCode,
         phone: websites.phone,
