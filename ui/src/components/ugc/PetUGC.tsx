@@ -66,11 +66,13 @@ export const PetUGC = ({ website, pet, slug }: Props) => {
 
       <main className="w-full max-w-xl mx-auto px-4 pt-16 pb-24">
         <section className="flex items-center gap-4 pb-5 flex-col">
-          <img
-            src={pet?.image || "no Image"}
-            alt={pet.name}
-            className="size-40 aspect-square object-cover rounded-full "
-          />
+          {pet.image && (
+            <img
+              src={pet?.image || "no Image"}
+              alt={pet.name}
+              className="size-40 aspect-square object-cover rounded-full "
+            />
+          )}
           <h1 className="text-3xl font-bold">{pet.name}</h1>
         </section>
 
@@ -117,12 +119,14 @@ export const PetUGC = ({ website, pet, slug }: Props) => {
         </section>
 
         {/* Description */}
-        <section className="mt-10 ">
-          <h2 className="text-xl font-bold">
-            {t("about")} {pet.name}
-          </h2>
-          <p className="mt-2">{pet.description}</p>
-        </section>
+        {pet.description && (
+          <section className="mt-10 ">
+            <h2 className="text-xl font-bold">
+              {t("about")} {pet.name}
+            </h2>
+            <p className="mt-2">{pet.description}</p>
+          </section>
+        )}
 
         {/* Gallery */}
         {pet.images && pet.images.length > 0 && (

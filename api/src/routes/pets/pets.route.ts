@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { validator } from "../../middleware/validation.middleware";
 import { checkPermission } from "../../middleware/auth.middleware";
 import { db } from "../../lib/db";
-import { and, eq, getTableColumns, ilike, sql } from "drizzle-orm";
+import { and, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
 import { type Variables } from "../..";
 import {
   createPetSchema,
@@ -42,7 +42,7 @@ export const petsRoute = new Hono<{ Variables: Variables }>()
       )
       .limit(10)
       .offset((data.page - 1) * 10)
-      .orderBy(pets.id);
+      .orderBy(desc(pets.id));
 
     return c.json({
       rows,

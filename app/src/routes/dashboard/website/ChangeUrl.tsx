@@ -93,10 +93,11 @@ export const ChangeUrl = ({ open, setOpen }: props) => {
                 <FormLabel>{t("title")}</FormLabel>
                 <FormControl>
                   <InputGroup>
-                    <InputGroupAddon>
-                      <InputGroupText>capupet.com/</InputGroupText>
+                    <InputGroupAddon align="inline-end">
+                      <InputGroupText>.capu.pet</InputGroupText>
                     </InputGroupAddon>
                     <InputGroupInput
+                      className="pl-3"
                       value={field.value}
                       onChange={(e) =>
                         field.onChange(e.target.value.toLowerCase())

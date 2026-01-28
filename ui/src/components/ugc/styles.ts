@@ -17,9 +17,9 @@ export function titleStyle(style: string) {
 export function containerStyle(style: string) {
   return defineStyles(
     {
-      modern: "w-full max-w-5xl mx-auto px-4 pt-8 pb-24",
-      minimalist: "w-full max-w-3xl mx-auto px-4 pt-8 pb-24",
-      friendly: "w-full max-w-5xl mx-auto px-4 pt-8 pb-24",
+      modern: "w-full max-w-5xl mx-auto px-4 pt-16 pb-24",
+      minimalist: "w-full max-w-3xl mx-auto px-4 pt-16 pb-24",
+      friendly: "w-full max-w-5xl mx-auto px-4 pt-16 pb-24",
     },
     style
   );
@@ -50,10 +50,9 @@ export function cardStyle(style: string) {
 export function listedInformationStyle(style: string) {
   return defineStyles(
     {
-      modern:
-        "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
+      modern: "p-4 border rounded-2xl flex items-center gap-3 font-semibold",
       minimalist:
-        "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
+        "p-4 border rounded-2xl flex items-center gap-3 font-semibold",
       friendly:
         "p-4 bg-neutral-100 rounded-2xl flex items-center gap-3 font-semibold",
     },

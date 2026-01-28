@@ -53,7 +53,7 @@ export const CreateWebsite = () => {
 
   return (
     <Form {...slugForm}>
-      <form onSubmit={submit} className="">
+      <form onSubmit={submit} className="md:max-w-sm">
         <FormField
           control={slugForm.control}
           name="slug"
@@ -62,16 +62,16 @@ export const CreateWebsite = () => {
               <FormLabel>Slug</FormLabel>
               <FormControl>
                 <InputGroup>
-                  <InputGroupAddon>
-                    <InputGroupText>capupet.com/</InputGroupText>
-                  </InputGroupAddon>
                   <InputGroupInput
-                    placeholder=""
+                    className="pl-3"
                     value={field.value}
                     onChange={(e) =>
                       field.onChange(e.target.value.toLowerCase())
                     }
                   />
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupText>.capu.pet</InputGroupText>
+                  </InputGroupAddon>
                 </InputGroup>
               </FormControl>
               <FormMessage />

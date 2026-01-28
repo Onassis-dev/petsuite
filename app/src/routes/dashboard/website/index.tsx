@@ -36,7 +36,6 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-  InputGroupText,
 } from "@workspace/ui/components/ui/input-group";
 import { Button } from "@workspace/ui/components/ui/button";
 import {
@@ -163,14 +162,9 @@ export default function WebsitePage() {
       <Form {...websitesForm}>
         <form onSubmit={submit} className="gap-4">
           <FormItem>
-            <FormLabel>Slug</FormLabel>
+            <FormLabel>Url</FormLabel>
             <FormControl>
-              <InputGroup>
-                <InputGroupAddon>
-                  <InputGroupText>capupet.com/</InputGroupText>
-                </InputGroupAddon>
-                <InputGroupInput value={data?.slug || ""} readOnly />
-              </InputGroup>
+              <Input value={`${data?.slug || ""}.capu.pet`} readOnly />
             </FormControl>
             <div className="grid grid-cols-3 gap-2 pt-2 pb-6">
               <Button

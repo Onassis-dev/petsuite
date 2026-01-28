@@ -35,7 +35,7 @@ export const MainUGC = ({ website, apiOrigin, slug }: Props) => {
   const [species, setSpecies] = useState<string | null>(null);
   const [totalCount, setTotalCount] = useState(0);
 
-  const itemsPerPage = 18;
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
   const t = ugcI18n(website.lang);

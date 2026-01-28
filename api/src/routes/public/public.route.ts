@@ -69,8 +69,8 @@ export const publicRoute = new Hono()
           data.species ? eq(pets.species, data.species) : undefined
         )
       )
-      .limit(18)
-      .offset((data.page - 1) * 18);
+      .limit(12)
+      .offset((data.page - 1) * 12);
 
     return c.json(
       petsArray.map((pet) => ({

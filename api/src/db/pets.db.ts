@@ -40,7 +40,7 @@ export const pets = pgTable("pets", {
   publicDescription: varchar(),
   admissionDate: date(),
   bornDate: date(),
-  public: boolean().notNull().default(false),
+  public: boolean().notNull().default(true),
   image: varchar(),
   fts: varchar().generatedAlwaysAs((): SQL => sql`concat_fts(${pets.name})`),
   organizationId,
