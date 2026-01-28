@@ -4,6 +4,7 @@ import {
   CircleCheckBig,
   Home,
   PawPrint,
+  Settings,
   Users,
 } from "lucide-react";
 import {
@@ -40,6 +41,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     website: {
       es: "Sitio web",
       en: "Website",
+    },
+    settings: {
+      es: "Configuración",
+      en: "Settings",
     },
   });
 
@@ -104,6 +109,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </SidebarMenuButton>
             </SidebarMenuItem>
           )}
+        </SidebarMenu>
+        <SidebarMenu className="mt-auto">
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={isActive(location, "settings")}
+            >
+              <Link to="/dashboard/settings">
+                <Settings className="size-5!" strokeWidth={1.8} />
+                <span>{t("settings")}</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
     </Sidebar>

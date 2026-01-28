@@ -41,25 +41,13 @@ export default function SignUpPage() {
       es: "Nombre de usuario",
       en: "Username",
     },
-    enterUsername: {
-      es: "Introduce tu nombre de usuario",
-      en: "Enter your username",
-    },
     email: {
       es: "Correo electrónico",
       en: "Email",
     },
-    enterEmail: {
-      es: "Introduce tu correo",
-      en: "Enter your email",
-    },
     password: {
       es: "Contraseña",
       en: "Password",
-    },
-    enterPassword: {
-      es: "Introduce tu contraseña",
-      en: "Enter your password",
     },
     haveAccount: {
       es: "¿Ya tienes una cuenta?",
@@ -125,9 +113,7 @@ export default function SignUpPage() {
     <>
       <div className="w-full max-w-sm">
         <CardHeader className="pb-0 space-y-1 mb-6">
-          <CardTitle className="text-center text-2xl font-semibold">
-            {t("register")}
-          </CardTitle>
+          <CardTitle className="text-center">{t("register")}</CardTitle>
         </CardHeader>
         <Card className="mx-2">
           <CardContent>
@@ -154,7 +140,7 @@ export default function SignUpPage() {
                     <FormItem>
                       <FormLabel>{t("username")}</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder={t("enterUsername")} />
+                        <Input {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -167,7 +153,7 @@ export default function SignUpPage() {
                     <FormItem>
                       <FormLabel>{t("email")}</FormLabel>
                       <FormControl>
-                        <Input {...field} placeholder={t("enterEmail")} />
+                        <Input {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -180,10 +166,7 @@ export default function SignUpPage() {
                     <FormItem>
                       <FormLabel>{t("password")}</FormLabel>
                       <FormControl>
-                        <PasswordInput
-                          field={field}
-                          placeholder={t("enterPassword")}
-                        />
+                        <PasswordInput field={field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -199,14 +182,14 @@ export default function SignUpPage() {
         </Card>
       </div>
 
-      <p className="text-sm text-center mt-6">
+      <p className="text-center mt-6">
         {t("haveAccount")}{" "}
-        <Link to="/signin" className="text-blue">
+        <Link to="/signin" className="text-orange-500">
           {t("signIn")}
         </Link>
       </p>
 
-      <p className="text-[13px] opacity-60 text-center max-w-xs w-full">
+      <p className="text-sm opacity-60 text-center max-w-xs w-full mt-2">
         {t("byRegistering")}{" "}
         <a target="_blank" className="underline" href="/terms">
           {t("termsAndConditions")}

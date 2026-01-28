@@ -18,7 +18,6 @@ export const checkPermission = (permission?: Permission) =>
 
     const [userPermissions] = await db
       .select({
-        plan: organizations.plan,
         lang: users.lang,
         emailVerified: users.emailVerified,
         orgId: organizations.id,

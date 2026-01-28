@@ -20,7 +20,6 @@ import { Button } from "@workspace/ui/components/ui/button";
 import { cn } from "@workspace/ui/lib/utils";
 import { useI18n } from "@/hooks/use-i18n";
 import { Logout } from "./Logout";
-import { Settings } from "./Settings";
 
 export function SelectOrganization() {
   const t = useI18n({
@@ -44,7 +43,6 @@ export function SelectOrganization() {
   const client = useQueryClient();
   const [openOrganization, setOpenOrganization] = useState(false);
   const [open, setOpen] = useState(false);
-  const [openSettings, setOpenSettings] = useState(false);
   const [openLogout, setOpenLogout] = useState(false);
 
   const navigate = useNavigate();
@@ -93,7 +91,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    setOpenSettings(true);
+                    navigate("/dashboard/settings");
                     setOpen(false);
                   }}
                 >
@@ -105,7 +103,7 @@ export function SelectOrganization() {
                   variant="secondary"
                   className="text-xs h-auto px-1.5 py-1"
                   onClick={() => {
-                    setOpenSettings(true);
+                    navigate("/dashboard/settings");
                     setOpen(false);
                   }}
                 >
@@ -166,7 +164,6 @@ export function SelectOrganization() {
         setOpen={setOpenOrganization}
       />
       <Logout open={openLogout} setOpen={setOpenLogout} />
-      <Settings open={openSettings} setOpen={setOpenSettings} />
     </>
   );
 }

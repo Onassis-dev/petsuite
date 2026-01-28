@@ -23,7 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api, get } from "@/lib/api";
 import { Button } from "@workspace/ui/components/ui/button";
-import { Card, CardContent } from "@workspace/ui/components/ui/card";
+import { Card, CardContent, CardTitle } from "@workspace/ui/components/ui/card";
 import { LoadingView } from "@/components/LoadingView";
 import { useI18n } from "@/hooks/use-i18n";
 import { useNavigate } from "react-router";
@@ -58,10 +58,6 @@ export default function OnboardingPage() {
     joinExistingOrg: {
       es: "¿Quieres unirte a una organización existente? Pide a tu administrador que te mande una invitación",
       en: "Do you want to join an existing organization? Ask your administrator to send you an invitation.",
-    },
-    orgNamePlaceholder: {
-      es: "Ingresa el nombre de tu organización",
-      en: "Enter the name of your organization",
     },
   });
   const { session } = useSession();
@@ -104,10 +100,8 @@ export default function OnboardingPage() {
   return (
     <main className="w-full flex flex-col items-center px-4">
       <div className="text-center max-w-sm">
-        <h1 className="text-3xl">{t("welcome")}</h1>
-        <p className="text-sm text-muted-foreground mb-6">
-          {t("welcomeDescription")}
-        </p>
+        <CardTitle className="">{t("welcome")}</CardTitle>
+        <p className=" text-muted-foreground mb-6">{t("welcomeDescription")}</p>
 
         <Card>
           <CardContent>
@@ -119,10 +113,7 @@ export default function OnboardingPage() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input
-                          placeholder={t("orgNamePlaceholder")}
-                          {...field}
-                        />
+                        <Input {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -176,9 +167,7 @@ export default function OnboardingPage() {
             )}
           </CardContent>
         </Card>
-        <p className="text-sm text-muted-foreground mt-4">
-          {t("joinExistingOrg")}
-        </p>
+        <p className="text-muted-foreground mt-4">{t("joinExistingOrg")}</p>
       </div>
     </main>
   );

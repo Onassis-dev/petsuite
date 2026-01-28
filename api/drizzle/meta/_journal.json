@@ -155,6 +155,27 @@
       "when": 1769554420559,
       "tag": "0021_robust_jean_grey",
       "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1769629137486,
+      "tag": "0022_silent_tag",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1769632011864,
+      "tag": "0023_dizzy_the_initiative",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1769632088594,
+      "tag": "0024_ordinary_pepper_potts",
+      "breakpoints": true
     }
   ]
 }

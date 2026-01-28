@@ -42,17 +42,9 @@ export default function SignInPage() {
       es: "Correo electrónico",
       en: "Email",
     },
-    enterEmail: {
-      es: "Introduce tu correo",
-      en: "Enter your email",
-    },
     password: {
       es: "Contraseña",
       en: "Password",
-    },
-    enterPassword: {
-      es: "Introduce tu contraseña",
-      en: "Enter your password",
     },
     forgotPassword: {
       es: "Olvidé mi contraseña",
@@ -97,9 +89,7 @@ export default function SignInPage() {
   return (
     <div className="w-full max-w-sm">
       <CardHeader className="pb-0 space-y-1 mb-6">
-        <CardTitle className="text-center text-2xl font-semibold">
-          {t("welcomeBack")}
-        </CardTitle>
+        <CardTitle className="text-center">{t("welcomeBack")}</CardTitle>
       </CardHeader>
       <Card className="mx-2">
         <CardContent>
@@ -128,7 +118,7 @@ export default function SignInPage() {
                   <FormItem>
                     <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
-                      <Input {...field} placeholder={t("enterEmail")} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -143,16 +133,13 @@ export default function SignInPage() {
                       {t("password")}
                       <Link
                         to="/forgot-password"
-                        className="cursor-pointer text-sm text-right"
+                        className="cursor-pointer text-sm text-right font-medium"
                       >
                         {t("forgotPassword")}
                       </Link>
                     </FormLabel>
                     <FormControl>
-                      <PasswordInput
-                        field={field}
-                        placeholder={t("enterPassword")}
-                      />
+                      <PasswordInput field={field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -165,9 +152,9 @@ export default function SignInPage() {
           </Form>
         </CardContent>
       </Card>
-      <p className="text-sm text-center mt-6">
+      <p className="text-center mt-6">
         {t("noAccount")}{" "}
-        <Link to="/signup" className="text-blue">
+        <Link to="/signup" className="text-orange-500">
           {t("register")}
         </Link>
       </p>

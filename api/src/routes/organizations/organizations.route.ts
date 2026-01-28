@@ -89,4 +89,21 @@ export const organizationsRoute = new Hono<{ Variables: Variables }>()
       .where(eq(organizations.id, c.get("orgId")));
 
     return c.json({});
+  })
+
+  .delete("/logo", async (c) => {
+    const [org] = await db
+      .select({ logo: organizations.logo })
+      .from(organizations)
+      .where(eq(organizations.id, c.get("orgId")));
+    if (!org?.logo) return sendError(c, null, 404);
+
+    await s3.delete(org.logo);
+
+    await db
+      .update(organizations)
+      .set({ logo: null })
+      .where(eq(organizations.id, c.get("orgId")));
+
+    return c.json({});
   });

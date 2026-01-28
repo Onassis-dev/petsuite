@@ -6,7 +6,7 @@ import { and, eq, getTableColumns, sql } from "drizzle-orm";
 import { permissions } from "../../db/auth.db";
 import { users } from "../../db/auth.db";
 import { organizations } from "../../db/auth.db";
-import { updateOrgSchema } from "./user.schema";
+import { updateOrgSchema, updateUserSchema } from "./user.schema";
 import { validator } from "../../middleware/validation.middleware";
 import { sendError } from "../../lib/errors";
 import { s3 } from "../../lib/s3";
@@ -22,7 +22,6 @@ export const usersRoute = new Hono<{ Variables: Variables }>()
         ...getTableColumns(permissions),
         orgName: organizations.name,
         orgLogo: organizations.logo,
-        plan: organizations.plan,
         owner: sql`${organizations.ownerId} = ${userId}`,
         verified: users.emailVerified,
         name: users.name,
@@ -74,6 +73,17 @@ export const usersRoute = new Hono<{ Variables: Variables }>()
     await db
       .update(users)
       .set({ permissionId: permission.id })
+      .where(eq(users.id, c.get("userId")));
+
+    return c.json({});
+  })
+
+  .put("/data", validator("json", updateUserSchema), async (c) => {
+    const data = c.req.valid("json");
+
+    await db
+      .update(users)
+      .set(data)
       .where(eq(users.id, c.get("userId")));
 
     return c.json({});

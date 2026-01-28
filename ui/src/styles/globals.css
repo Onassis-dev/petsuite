@@ -48,8 +48,8 @@
 :root {
   --background: #fffdfd;
   --foreground: #3d3d3d;
-  --card: hsl(0 0% 99%);
-  --card-foreground: hsl(0 0% 12%);
+  --card: #fffdfd;
+  --card-foreground: #3d3d3d;
   --primary: var(--color-crusta-500);
   --primary-foreground: hsl(0 0% 100%);
   --secondary: #f6f6f6;

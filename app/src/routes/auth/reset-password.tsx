@@ -64,17 +64,9 @@ export default function ResetPasswordPage() {
       es: "Nueva contraseña",
       en: "New password",
     },
-    enterNewPassword: {
-      es: "Introduce tu nueva contraseña",
-      en: "Enter your new password",
-    },
     confirmPassword: {
       es: "Confirmar contraseña",
       en: "Confirm password",
-    },
-    confirmNewPassword: {
-      es: "Confirma tu nueva contraseña",
-      en: "Confirm your new password",
     },
   });
   const navigate = useNavigate();
@@ -109,22 +101,18 @@ export default function ResetPasswordPage() {
   if (!token) {
     return (
       <div className="w-full max-w-sm mt-12 sm:mt-32 flex flex-col items-center gap-4">
-        <CardHeader className="pb-0 space-y-1">
-          <CardTitle className="text-center text-2xl mb-6">
-            {t("invalidToken")}
-          </CardTitle>
-        </CardHeader>
+        <CardTitle className="text-center">{t("invalidToken")}</CardTitle>
         <Button asChild className="w-64">
-          <Link to="/forgot-password" className="text-blue">
+          <Link to="/forgot-password" className="text-orange-500">
             {t("requestNewLink")}
           </Link>
         </Button>
         <div className="text-sm text-center space-y-2">
-          <p>
-            <Link to="/signin" className="text-blue">
+          <Button asChild className="w-64" variant="ghost">
+            <Link to="/signin" className="text-orange-500">
               {t("backToLogin")}
             </Link>
-          </p>
+          </Button>
         </div>
       </div>
     );
@@ -133,9 +121,7 @@ export default function ResetPasswordPage() {
   return (
     <div className="w-full max-w-sm mt-12 sm:mt-32">
       <CardHeader className="pb-0 space-y-1">
-        <CardTitle className="text-center text-2xl mb-6">
-          {t("resetPassword")}
-        </CardTitle>
+        <CardTitle className="text-center mb-6">{t("resetPassword")}</CardTitle>
       </CardHeader>
       <Card>
         <CardContent>
@@ -148,10 +134,7 @@ export default function ResetPasswordPage() {
                   <FormItem>
                     <FormLabel>{t("newPassword")}</FormLabel>
                     <FormControl>
-                      <PasswordInput
-                        field={field}
-                        placeholder={t("enterNewPassword")}
-                      />
+                      <PasswordInput field={field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -164,10 +147,7 @@ export default function ResetPasswordPage() {
                   <FormItem>
                     <FormLabel>{t("confirmPassword")}</FormLabel>
                     <FormControl>
-                      <PasswordInput
-                        field={field}
-                        placeholder={t("confirmNewPassword")}
-                      />
+                      <PasswordInput field={field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

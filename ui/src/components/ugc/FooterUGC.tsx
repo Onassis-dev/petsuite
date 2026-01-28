@@ -6,7 +6,7 @@ import {
   WhatsAppIcon,
   YouTubeIcon,
 } from "@workspace/ui/components/icons";
-import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
+import { GlobeIcon, MailIcon } from "lucide-react";
 
 interface Props {
   website: Website;

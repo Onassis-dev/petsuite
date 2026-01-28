@@ -47,7 +47,6 @@ export const auth = betterAuth({
       mapProfileToUser(profile) {
         return {
           name: profile.name,
-          image: profile.picture,
         };
       },
     },

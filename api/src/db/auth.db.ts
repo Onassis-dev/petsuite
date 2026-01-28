@@ -1,5 +1,5 @@
 import { SQL, sql } from "drizzle-orm";
-import { serial, smallint, integer } from "drizzle-orm/pg-core";
+import { serial, integer } from "drizzle-orm/pg-core";
 import {
   pgTable,
   text,
@@ -17,10 +17,10 @@ export const users = pgTable("users", {
   emailVerified: boolean("email_verified")
     .$defaultFn(() => false)
     .notNull(),
-  image: text("image"),
   createdAt: timestamp("created_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
+  image: text("image"),
   updatedAt: timestamp("updated_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
@@ -82,7 +82,6 @@ export const organizations = pgTable("organizations", {
   id: serial().primaryKey().notNull(),
   name: varchar().notNull().unique(),
   logo: varchar(),
-  plan: smallint().default(0).notNull(),
   ownerId: text()
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
