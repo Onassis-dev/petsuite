@@ -176,6 +176,13 @@
       "when": 1769632088594,
       "tag": "0024_ordinary_pepper_potts",
       "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1769648959755,
+      "tag": "0025_chilly_albert_cleary",
+      "breakpoints": true
     }
   ]
 }

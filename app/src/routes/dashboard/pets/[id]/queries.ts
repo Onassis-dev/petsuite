@@ -1,4 +1,4 @@
-import { api, get } from '@/lib/api';
+import { api, get } from "@/lib/api";
 
 export const getPetGeneralInfo = (id: string) =>
   get(api.pets.general.$get({ query: { id: String(id) } }));

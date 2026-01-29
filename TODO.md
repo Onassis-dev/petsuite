@@ -3,13 +3,9 @@ TODO
 - Settings
   - Users page
 
-- Auth
-  - # Fix design
-
 - Pets
   - Medic tab
-  - Notes tab
-  - Files tab
+  - # Files tab
 
 - DEPLOYMENT
 

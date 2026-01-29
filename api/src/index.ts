@@ -9,6 +9,7 @@ import { tasksRoute } from "./routes/tasks/tasks.route";
 import { imagesRoute } from "./routes/images/images.route";
 import { websitesRoute } from "./routes/websites/websites.route";
 import { publicRoute } from "./routes/public/public.route";
+import { notesRoute } from "./routes/notes/notes.route";
 
 export type Variables = {
   userId: string;
@@ -40,7 +41,8 @@ const app = new Hono<{ Variables: Variables }>()
   .route("/users", usersRoute)
   .route("/organizations", organizationsRoute)
   .route("/websites", websitesRoute)
-  .route("/public", publicRoute);
+  .route("/public", publicRoute)
+  .route("/notes", notesRoute);
 
 export default app;
 
